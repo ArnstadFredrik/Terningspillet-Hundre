@@ -1,0 +1,232 @@
+$res-small: 'max-width: 420px'
+$res-medium: 'max-width: 680px'
+$res-large: 'max-width: 900px'
+
+$font: 'Roboto', 'sans-serif'
+
+$main: orangered
+$backgroundColor: darken(white, 3%)
+$mainDark: darken($main, 10%)
+$mainLight: lighten($main, 35%)
+$containerColor: darken(white, 5%)
+$active: darken($containerColor, 3%)
+$fontColor: darken(white, 70%)
+
+body
+  display: grid
+  justify-items: center
+  align-items: center
+  position: relative
+  height: 100vh
+  width: 100vw
+  font:
+    family: $font
+    size: 14px
+  color: $fontColor
+  background: $backgroundColor
+
+
+  button
+    background: white
+    border: none
+    border-radius: 2px
+    color: $fontColor
+    letter-spacing: 2px
+    font:
+      family: $font
+      size: 0.8em
+    text-transform: uppercase
+    transition: all 0.3s
+
+    &:hover
+      background: $mainDark
+      color: white
+      font-weight: 400
+      box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
+
+  button, input
+    &:focus
+      outline: none
+
+  input
+    text-transform: uppercase
+    font:
+      family: $font
+      size: 0.8em
+    padding: 5px
+
+.settingsButton
+  position: absolute
+  top: 1vh
+  right: 5vw
+  font-size: 1.5em
+  width: 90vw
+  display: grid
+  grid-gap: 10px
+  background: $containerColor
+  padding: 10px
+  box-sizing: border-box
+
+  button
+    padding: 10px
+
+.settings
+  position: absolute
+  top: 1vh
+  right: 5vw
+  display: none
+  font-size: 1.5em
+  width: 90vw
+  display: grid
+  grid-template-columns: repeat(5, 1fr)
+  grid-gap: 10px
+  background: $containerColor
+  padding: 10px
+  box-sizing: border-box
+
+  input
+    font-size: 0.8em
+
+.close
+  display: none
+
+.open
+  display: grid
+
+.done
+  position: absolute
+  width: 70vw
+  height: 25vh
+  z-index: 200
+  background-color: $mainDark
+  color: white
+  font-size: 2em
+  vertical-align: center
+  text-align: center
+  text-transform: uppercase
+  letter-spacing: 4px
+  top: 60%
+  left: 50%
+  margin-left: -35vw
+  display: grid
+  justify-items: center
+  align-items: center
+
+
+.grid
+  padding: 20px
+  box-sizing: border-box
+  display: grid
+  grid-template-columns: repeat(2,1fr)
+  width: 90vw
+  height: 80vh
+  background: $containerColor
+  text-align: center
+  text-transform: uppercase
+  letter-spacing: 4px
+
+.player
+  display: grid
+  grid-template-rows: 1fr 2fr 1fr
+  align-items: center
+  position: relative
+  transition: all 0.4s
+
+  &.active
+    background: $active
+    color: darken($fontColor, 5%)
+
+    &:before
+      content: ""
+      position: absolute
+      background: $mainDark
+      width: 15px
+      height: 15px
+      border-radius: 50%
+      top: 60px
+      left: 50%
+      margin-left: 102px
+
+  .name
+    font:
+      size: 2.5em
+      weight: 300
+
+  .score
+    font:
+      size: 6em
+      weight: 400
+    color: $mainDark
+
+  .current
+    width: 140px
+    height: 90px
+    padding: 20px
+    justify-self: center
+    box-sizing: border-box
+    background: $mainDark
+    border-radius: 2px
+    color: white
+    & span
+      font-size: 0.8em
+
+  p.currentScore
+    font-size: 2em
+    margin: 10px
+
+
+.menu
+  position: absolute
+  height: 80vh
+  width: 20vw
+  top: 50%
+  margin-top: -40vh
+  left: 50%
+  margin-left: -10vw
+  padding: 20px
+  box-sizing: border-box
+  display: grid
+  grid-template-rows: 1fr 2fr 1fr 1fr
+  justify-items: center
+  align-items: center
+  text-align: center
+  font:
+    size: 1.5em
+    weight: 300
+  text-transform: uppercase
+  z-index: 100
+  color: $fontColor
+
+  &:hover
+    color: white
+
+  .newGame
+    padding: 10px
+    box-sizing: border-box
+
+  .dice
+    height: 100px
+    width: 100px
+    background-color: white !important
+    box-shadow: 0px 0px 10px 2px #bbb
+
+    &.one
+      background: url('../img/dice-01.svg')
+    &.two
+      background: url('../img/dice-02.svg')
+    &.three
+      background: url('../img/dice-03.svg')
+    &.four
+      background: url('../img/dice-04.svg')
+    &.five
+      background: url('../img/dice-05.svg')
+    &.six
+      background: url('../img/dice-06.svg')
+
+  .rollDice
+    padding: 10px
+    box-sizing: border-box
+
+  .hold
+    padding: 10px
+    box-sizing: border-box
