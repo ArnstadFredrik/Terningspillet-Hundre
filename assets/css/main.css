@@ -299,14 +299,15 @@ body input {
     grid-column: 2;
   }
   .grid {
-    height: 60vh;
+    height: auto;
     grid-template-columns: 1fr;
     grid-row: 1;
   }
   .player {
     display: none;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 0.25fr);
     font-size: 0.7em;
+    padding: 20px;
     transition: all 0.5s;
   }
   .player .current {
@@ -319,7 +320,7 @@ body input {
     display: grid;
   }
   .player.active:before {
-    top: 42px;
+    top: 22px;
     margin-left: -7.5px;
   }
   .player0.active:before {
