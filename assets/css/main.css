@@ -366,7 +366,7 @@ body input {
   }
   .menu {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr repeat(2, 0.5fr);
+    grid-template-rows: 1fr repeat(3, 0.5fr);
     grid-gap: 20px;
     height: auto;
     grid-row: 2;
@@ -377,7 +377,7 @@ body input {
     width: 100%;
   }
   .menu .newGame {
-    grid-row: 3;
+    grid-row: 4;
     grid-column: span 2;
   }
   .menu .dice {
