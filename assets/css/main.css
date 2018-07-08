@@ -353,8 +353,8 @@ body input {
     grid-template-rows: repeat(5, 1fr);
   }
   .settings input {
-    border: none;
-    border-radius: 0px;
+    border: none !important;
+    border-radius: 0px !important;
   }
   .open {
     display: grid;
