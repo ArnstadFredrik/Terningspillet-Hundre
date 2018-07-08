@@ -1,0 +1,2 @@
+- show next plsyer score on mobile
+- add homescreen icon ios
