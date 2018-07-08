@@ -1,4 +1,4 @@
-let scores = [80,80];
+let scores = [0,0];
 let current = 0;
 let player = 0;
 let goal = 100;
