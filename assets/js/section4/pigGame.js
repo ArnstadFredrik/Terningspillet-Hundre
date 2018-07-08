@@ -1,7 +1,9 @@
-let scores = [0,0];
+let scores = [80,80];
 let current = 0;
 let player = 0;
 let goal = 100;
+
+
 
 function rollDice() {
   let dice = Math.floor(Math.random() * 6)+1;
@@ -83,9 +85,11 @@ function checkWinner() {
 
 function createDoneScreen() {
   let done = document.createElement('div');
+  let winner = document.getElementById(`player${player}Name`).value
+  if (winner == '')
+    winner = `Spiller ${player+1}`
   done.setAttribute('class','done');
-  done.innerHTML = `Player ${player+1} is the winner with ${scores[player]} point.
-  Good Game.`;
+  done.innerHTML = `Gratulerer ${winner}. Du vant med ${scores[player]} poeng.`;
   document.body.appendChild(done);
   console.log('Game is done');
 }
@@ -145,8 +149,8 @@ function closeSettings() {
 }
 
 function setDefault() {
-  let oneName = document.getElementById('playerOneName').value;
-  let twoName = document.getElementById('playerTwoName').value;
+  let oneName = document.getElementById(`player0Name`).value;
+  let twoName = document.getElementById(`player1Name`).value;
   let newGoal = document.getElementById('goal').value;
 
   let playerOne = document.querySelector('.nameOne');

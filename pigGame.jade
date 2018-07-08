@@ -1,6 +1,8 @@
 //output: pigGame.html
 html
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet")
     link(rel="stylesheet" type="text/css" href="assets/css/main.css")
   body
@@ -13,8 +15,8 @@ html
     .settingsButton.open
       button(onClick="showSettings()") Innstillinger
     .settings.close
-      input(placeholder="Spiller 1")#playerOneName
-      input(placeholder="Spiller 2")#playerTwoName
+      input(placeholder="Spiller 1")#player0Name
+      input(placeholder="Spiller 2")#player1Name
       input(placeholder="Mål")#goal
       button(onClick="setDefault()").submitt Lagre
       button(onClick="closeSettings()") Lukk
@@ -22,14 +24,14 @@ html
     
     .grid
       .player.player0.active
-        .name.nameOne Spiller 1
+        .name.nameOne#player0 Spiller 1
         .score.score0 0
         .current.current0 
           span Runde
           p.currentScore 0
           
       .player.player1
-        .name.nameTwo Spiller 2
+        .name.nameTwo#player1 Spiller 2
         .score.score1 0
         .current.current1 
           span Runde

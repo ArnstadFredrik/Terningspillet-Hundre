@@ -1,6 +1,8 @@
 
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
   </head>
@@ -15,22 +17,22 @@
       <button onClick="showSettings()">Innstillinger</button>
     </div>
     <div class="settings close">
-      <input placeholder="Spiller 1" id="playerOneName"/>
-      <input placeholder="Spiller 2" id="playerTwoName"/>
+      <input placeholder="Spiller 1" id="player0Name"/>
+      <input placeholder="Spiller 2" id="player1Name"/>
       <input placeholder="Mål" id="goal"/>
       <button onClick="setDefault()" class="submitt">Lagre</button>
       <button onClick="closeSettings()">Lukk</button>
     </div>
     <div class="grid">
       <div class="player player0 active">
-        <div class="name nameOne">Spiller 1</div>
+        <div id="player0" class="name nameOne">Spiller 1</div>
         <div class="score score0">0</div>
         <div class="current current0"> <span>Runde</span>
           <p class="currentScore">0</p>
         </div>
       </div>
       <div class="player player1">
-        <div class="name nameTwo">Spiller 2</div>
+        <div id="player1" class="name nameTwo">Spiller 2</div>
         <div class="score score1">0</div>
         <div class="current current1"> <span>Runde</span>
           <p class="currentScore">0</p>
