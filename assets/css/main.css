@@ -270,6 +270,12 @@ body input {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
   }
+  .open {
+    display: grid;
+  }
+  .close {
+    display: none;
+  }
   .menu {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr repeat(2, 0.5fr);
