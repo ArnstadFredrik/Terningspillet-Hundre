@@ -5,6 +5,14 @@ let goal = 100;
 
 pushDefault()
 
+function debug() {
+  scores = [43,92];
+  setScore();
+  changePlayer(player);
+  setScore();
+  changePlayer(player);
+}
+
 function rollDice() {
   let dice = Math.floor(Math.random() * 6)+1;
   return dice
@@ -41,7 +49,7 @@ function currentScore(currentScore) {
 
 function removeActive() {
   activePlayer = document.querySelector(`.player${player}`)
-  activePlayer.className = `player player${player}`;
+  activePlayer.className = `player player${player} passive`;
 
   activeMenu = document.querySelector(`.menu${player}`)
   activeMenu.className = `menu`;
@@ -94,9 +102,11 @@ function checkWinner() {
 function createDoneScreen() {
   let done = document.createElement('div');
   let winner = document.getElementById(`player${player}Name`).value
+
   if (winner == '')
     winner = `Spiller ${player+1}`
-  done.setAttribute('class','done');
+
+  done.setAttribute('class',`done done${player}`);
   done.innerHTML = `Gratulerer ${winner}. Du vant med ${scores[player]} poeng.`;
   document.body.appendChild(done);
   console.log('Game is done');

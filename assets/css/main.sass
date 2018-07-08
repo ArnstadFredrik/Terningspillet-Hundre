@@ -99,12 +99,16 @@ body
 .open
   display: grid
 
+.done0
+  background-color: $mainOneDark
+.done1
+  background-color: $mainTwoDark
+
 .done
   position: absolute
   width: 70vw
   height: 25vh
   z-index: 200
-  background-color: $mainOneDark
   color: white
   font-size: 2em
   vertical-align: center
@@ -139,7 +143,7 @@ body
   position: relative
   transition: all 0.4s
 
-  &.active
+  &.active, &.passive
     &:before
       position: absolute
       border-radius: 2px
@@ -156,7 +160,7 @@ body
       color: $mainOneDark
     .current
       background: $mainOneDark
-    &.active
+    &.active, &.passive
       background: $activeOne
       &:before
         background: $mainOneDark
@@ -171,7 +175,7 @@ body
       color: $mainTwoDark
     .current
       background: $mainTwoDark
-    &.active
+    &.active, &.passive
       background: $activeTwo
       &:before
         background: $mainTwoDark
@@ -364,10 +368,23 @@ body
       padding: 8px
       box-sizing: border-box
 
+    &.passive
+      display: grid
+      grid-template-rows: 0.25fr
+      grid-row: 1
+      padding: 10px
+      .name
+        display: none
+      .score
+        display: grid
+        font-size: 2.5em
+      .current
+        display: none
+
     &.active
       display: grid
 
-
+    &.active, &.passive
       &:before
         width: 20px
         height: 20px
@@ -382,16 +399,24 @@ body
         text-align: center
         box-sizing: border-box
 
+    &.passive
+      &:before
+        width: 15px
+        height: 15px
+        padding-left: 5px
+        font-size: 1em
+        top: 15px
+
 
   .player0
-    &.active
+    &.active, &.passive
       &:before
         content: "1"
         left: 5vw
 
 
   .player1
-    &.active
+    &.active, &.passive
       &:before
         content: "2"
         right: 5vw

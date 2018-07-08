@@ -86,12 +86,19 @@ body input {
   display: grid;
 }
 
+.done0 {
+  background-color: #cc3700;
+}
+
+.done1 {
+  background-color: #4c7e80;
+}
+
 .done {
   position: absolute;
   width: 70vw;
   height: 25vh;
   z-index: 200;
-  background-color: #cc3700;
   color: white;
   font-size: 2em;
   vertical-align: center;
@@ -128,7 +135,7 @@ body input {
   transition: all 0.4s;
 }
 
-.player.active:before {
+.player.active:before, .player.passive:before {
   position: absolute;
   border-radius: 2px;
   top: 7vh;
@@ -150,11 +157,11 @@ body input {
   background: #cc3700;
 }
 
-.player.player0.active {
+.player.player0.active, .player.player0.passive {
   background: rgba(255, 69, 0, 0.15);
 }
 
-.player.player0.active:before {
+.player.player0.active:before, .player.player0.passive:before {
   background: #cc3700;
   content: "1";
   left: 5vw;
@@ -172,11 +179,11 @@ body input {
   background: #4c7e80;
 }
 
-.player.player1.active {
+.player.player1.active, .player.player1.passive {
   background: rgba(95, 158, 160, 0.15);
 }
 
-.player.player1.active:before {
+.player.player1.active:before, .player.player1.passive:before {
   background: #4c7e80;
   content: "2";
   right: 5vw;
@@ -397,10 +404,26 @@ body input {
     padding: 8px;
     box-sizing: border-box;
   }
+  .player.passive {
+    display: grid;
+    grid-template-rows: 0.25fr;
+    grid-row: 1;
+    padding: 10px;
+  }
+  .player.passive .name {
+    display: none;
+  }
+  .player.passive .score {
+    display: grid;
+    font-size: 2.5em;
+  }
+  .player.passive .current {
+    display: none;
+  }
   .player.active {
     display: grid;
   }
-  .player.active:before {
+  .player.active:before, .player.passive:before {
     width: 20px;
     height: 20px;
     top: 22px;
@@ -413,11 +436,18 @@ body input {
     text-align: center;
     box-sizing: border-box;
   }
-  .player0.active:before {
+  .player.passive:before {
+    width: 15px;
+    height: 15px;
+    padding-left: 5px;
+    font-size: 1em;
+    top: 15px;
+  }
+  .player0.active:before, .player0.passive:before {
     content: "1";
     left: 5vw;
   }
-  .player1.active:before {
+  .player1.active:before, .player1.passive:before {
     content: "2";
     right: 5vw;
   }
