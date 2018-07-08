@@ -3,7 +3,7 @@ let current = 0;
 let player = 0;
 let goal = 100;
 
-
+pushDefault()
 
 function rollDice() {
   let dice = Math.floor(Math.random() * 6)+1;
@@ -42,12 +42,20 @@ function currentScore(currentScore) {
 function removeActive() {
   activePlayer = document.querySelector(`.player${player}`)
   activePlayer.className = `player player${player}`;
+
+  activeMenu = document.querySelector(`.menu${player}`)
+  activeMenu.className = `menu`;
+
   console.log(activePlayer);
 }
 
 function addActive() {
   activePlayer = document.querySelector(`.player${player}`)
   activePlayer.className = `player player${player} active`;
+
+  activeMenu = document.querySelector(`.menu`)
+  activeMenu.className = `menu menu${player}`;
+
   console.log(activePlayer);
 }
 
@@ -146,6 +154,11 @@ function closeSettings() {
 
   let settingsButton = document.querySelector('.settingsButton');
   settingsButton.className = 'settingsButton open'
+}
+
+function pushDefault() {
+  let newGoal = document.getElementById('goal');
+  newGoal.setAttribute('value',`${goal}`);
 }
 
 function setDefault() {

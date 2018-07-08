@@ -1,9 +1,12 @@
 body {
   display: grid;
+  grid-template-rows: auto;
+  grid-gap: 20px;
   justify-items: center;
   align-items: center;
   position: relative;
-  height: 100vh;
+  margin: 0;
+  height: auto;
   width: 100vw;
   font-family: "Roboto", "sans-serif";
   font-size: 14px;
@@ -42,15 +45,14 @@ body input {
 }
 
 .settingsButton {
-  position: absolute;
-  top: 1vh;
-  right: 5vw;
+  position: relative;
   font-size: 1.5em;
   width: 90vw;
   display: grid;
   grid-gap: 10px;
+  grid-row: 1;
   background: #f2f2f2;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -59,13 +61,12 @@ body input {
 }
 
 .settings {
-  position: absolute;
-  top: 1vh;
-  right: 5vw;
+  position: relative;
   display: none;
   font-size: 1.5em;
   width: 90vw;
   display: grid;
+  grid-row: 1;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
   background: #f2f2f2;
@@ -116,6 +117,7 @@ body input {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 4px;
+  grid-row: 2;
 }
 
 .player {
@@ -126,21 +128,58 @@ body input {
   transition: all 0.4s;
 }
 
-.player.active {
-  background: #ebebeb;
-  color: #404040;
+.player.active:before {
+  position: absolute;
+  border-radius: 2px;
+  top: 7vh;
+  padding: 10px;
+  padding-left: 12px;
+  box-sizing: border-box;
+  color: white;
 }
 
-.player.active:before {
-  content: "";
-  position: absolute;
+.player.player0 .name {
+  color: #cc3700;
+}
+
+.player.player0 .score {
+  color: #cc3700;
+}
+
+.player.player0 .current {
   background: #cc3700;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  top: 60px;
-  left: 50%;
-  margin-left: 102px;
+}
+
+.player.player0.active {
+  background: rgba(255, 69, 0, 0.15);
+}
+
+.player.player0.active:before {
+  background: #cc3700;
+  content: "1";
+  left: 5vw;
+}
+
+.player.player1 .name {
+  color: #4c7e80;
+}
+
+.player.player1 .score {
+  color: #4c7e80;
+}
+
+.player.player1 .current {
+  background: #4c7e80;
+}
+
+.player.player1.active {
+  background: rgba(95, 158, 160, 0.15);
+}
+
+.player.player1.active:before {
+  background: #4c7e80;
+  content: "2";
+  right: 5vw;
 }
 
 .player .name {
@@ -151,7 +190,6 @@ body input {
 .player .score {
   font-size: 6em;
   font-weight: 400;
-  color: #cc3700;
 }
 
 .player .current {
@@ -160,7 +198,6 @@ body input {
   padding: 20px;
   justify-self: center;
   box-sizing: border-box;
-  background: #cc3700;
   border-radius: 2px;
   color: white;
 }
@@ -196,6 +233,68 @@ body input {
   color: #4d4d4d;
 }
 
+.menu.menu0 button:hover {
+  background: #cc3700;
+  color: white;
+  font-weight: 400;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.menu.menu0 .dice.one {
+  background: url("../img/player1/dice-01.svg");
+}
+
+.menu.menu0 .dice.two {
+  background: url("../img/player1/dice-02.svg");
+}
+
+.menu.menu0 .dice.three {
+  background: url("../img/player1/dice-03.svg");
+}
+
+.menu.menu0 .dice.four {
+  background: url("../img/player1/dice-04.svg");
+}
+
+.menu.menu0 .dice.five {
+  background: url("../img/player1/dice-05.svg");
+}
+
+.menu.menu0 .dice.six {
+  background: url("../img/player1/dice-06.svg");
+}
+
+.menu.menu1 button:hover {
+  background: #4c7e80;
+  color: white;
+  font-weight: 400;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.menu.menu1 .dice.one {
+  background: url("../img/player2/dice-01.svg");
+}
+
+.menu.menu1 .dice.two {
+  background: url("../img/player2/dice-02.svg");
+}
+
+.menu.menu1 .dice.three {
+  background: url("../img/player2/dice-03.svg");
+}
+
+.menu.menu1 .dice.four {
+  background: url("../img/player2/dice-04.svg");
+}
+
+.menu.menu1 .dice.five {
+  background: url("../img/player2/dice-05.svg");
+}
+
+.menu.menu1 .dice.six {
+  background: url("../img/player2/dice-06.svg");
+}
+
 .menu:hover {
   color: white;
 }
@@ -210,30 +309,6 @@ body input {
   width: 100px;
   background-color: white !important;
   box-shadow: 0px 0px 10px 2px #bbb;
-}
-
-.menu .dice.one {
-  background: url("../img/dice-01.svg");
-}
-
-.menu .dice.two {
-  background: url("../img/dice-02.svg");
-}
-
-.menu .dice.three {
-  background: url("../img/dice-03.svg");
-}
-
-.menu .dice.four {
-  background: url("../img/dice-04.svg");
-}
-
-.menu .dice.five {
-  background: url("../img/dice-05.svg");
-}
-
-.menu .dice.six {
-  background: url("../img/dice-06.svg");
 }
 
 .menu .rollDice {
@@ -326,14 +401,25 @@ body input {
     display: grid;
   }
   .player.active:before {
+    width: 20px;
+    height: 20px;
     top: 22px;
     margin-left: -7.5px;
+    padding: 3px;
+    padding-left: 7px;
+    color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
   }
   .player0.active:before {
-    left: 100%;
+    content: "1";
+    left: 5vw;
   }
   .player1.active:before {
-    left: 0%;
+    content: "2";
+    right: 5vw;
   }
   .done {
     height: 37vh;

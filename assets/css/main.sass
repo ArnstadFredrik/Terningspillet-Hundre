@@ -4,27 +4,35 @@ $res-large: 'max-width: 900px'
 
 $font: 'Roboto', 'sans-serif'
 
-$main: orangered
+$mainOne: orangered
 $backgroundColor: darken(white, 3%)
-$mainDark: darken($main, 10%)
-$mainLight: lighten($main, 35%)
+$mainOneDark: darken($mainOne, 10%)
+$mainOneLight: lighten($mainOne, 35%)
 $containerColor: darken(white, 5%)
-$active: darken($containerColor, 3%)
+$activeOne: fade-out($mainOne, .85)
+
 $fontColor: darken(white, 70%)
+
+$mainTwo: cadetblue
+$activeTwo: fade-out($mainTwo, .85)
+$mainTwoDark: darken($mainTwo, 10%)
+$mainTwoLight: lighten($mainTwo, 35%)
 
 body
   display: grid
+  grid-template-rows: auto
+  grid-gap: 20px
   justify-items: center
   align-items: center
   position: relative
-  height: 100vh
+  margin: 0
+  height: auto
   width: 100vw
   font:
     family: $font
     size: 14px
   color: $fontColor
   background: $backgroundColor
-
 
   button
     background: white
@@ -39,7 +47,7 @@ body
     transition: all 0.3s
 
     &:hover
-      background: $mainDark
+      background: $mainOneDark
       color: white
       font-weight: 400
       box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
@@ -56,28 +64,26 @@ body
     padding: 5px
 
 .settingsButton
-  position: absolute
-  top: 1vh
-  right: 5vw
+  position: relative
   font-size: 1.5em
   width: 90vw
   display: grid
   grid-gap: 10px
+  grid-row: 1
   background: $containerColor
-  padding: 10px
+  padding: 20px
   box-sizing: border-box
 
   button
     padding: 10px
 
 .settings
-  position: absolute
-  top: 1vh
-  right: 5vw
+  position: relative
   display: none
   font-size: 1.5em
   width: 90vw
   display: grid
+  grid-row: 1
   grid-template-columns: repeat(5, 1fr)
   grid-gap: 10px
   background: $containerColor
@@ -98,7 +104,7 @@ body
   width: 70vw
   height: 25vh
   z-index: 200
-  background-color: $mainDark
+  background-color: $mainOneDark
   color: white
   font-size: 2em
   vertical-align: center
@@ -124,6 +130,7 @@ body
   text-align: center
   text-transform: uppercase
   letter-spacing: 4px
+  grid-row: 2
 
 .player
   display: grid
@@ -133,19 +140,43 @@ body
   transition: all 0.4s
 
   &.active
-    background: $active
-    color: darken($fontColor, 5%)
-
     &:before
-      content: ""
       position: absolute
-      background: $mainDark
-      width: 15px
-      height: 15px
-      border-radius: 50%
-      top: 60px
-      left: 50%
-      margin-left: 102px
+      border-radius: 2px
+      top: 7vh
+      padding: 10px
+      padding-left: 12px
+      box-sizing: border-box
+      color: white
+
+  &.player0
+    .name
+      color: $mainOneDark
+    .score
+      color: $mainOneDark
+    .current
+      background: $mainOneDark
+    &.active
+      background: $activeOne
+      &:before
+        background: $mainOneDark
+        content: "1"
+        left: 5vw
+
+
+  &.player1
+    .name
+      color: $mainTwoDark
+    .score
+      color: $mainTwoDark
+    .current
+      background: $mainTwoDark
+    &.active
+      background: $activeTwo
+      &:before
+        background: $mainTwoDark
+        content: "2"
+        right: 5vw
 
   .name
     font:
@@ -156,7 +187,6 @@ body
     font:
       size: 6em
       weight: 400
-    color: $mainDark
 
   .current
     width: 140px
@@ -164,7 +194,6 @@ body
     padding: 20px
     justify-self: center
     box-sizing: border-box
-    background: $mainDark
     border-radius: 2px
     color: white
     & span
@@ -197,6 +226,48 @@ body
   z-index: 100
   color: $fontColor
 
+  &.menu0
+    button
+      &:hover
+        background: $mainOneDark
+        color: white
+        font-weight: 400
+        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
+    .dice
+      &.one
+        background: url('../img/player1/dice-01.svg')
+      &.two
+        background: url('../img/player1/dice-02.svg')
+      &.three
+        background: url('../img/player1/dice-03.svg')
+      &.four
+        background: url('../img/player1/dice-04.svg')
+      &.five
+        background: url('../img/player1/dice-05.svg')
+      &.six
+        background: url('../img/player1/dice-06.svg')
+
+  &.menu1
+    button
+      &:hover
+        background: $mainTwoDark
+        color: white
+        font-weight: 400
+        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
+    .dice
+      &.one
+        background: url('../img/player2/dice-01.svg')
+      &.two
+        background: url('../img/player2/dice-02.svg')
+      &.three
+        background: url('../img/player2/dice-03.svg')
+      &.four
+        background: url('../img/player2/dice-04.svg')
+      &.five
+        background: url('../img/player2/dice-05.svg')
+      &.six
+        background: url('../img/player2/dice-06.svg')
+
   &:hover
     color: white
 
@@ -209,19 +280,6 @@ body
     width: 100px
     background-color: white !important
     box-shadow: 0px 0px 10px 2px #bbb
-
-    &.one
-      background: url('../img/dice-01.svg')
-    &.two
-      background: url('../img/dice-02.svg')
-    &.three
-      background: url('../img/dice-03.svg')
-    &.four
-      background: url('../img/dice-04.svg')
-    &.five
-      background: url('../img/dice-05.svg')
-    &.six
-      background: url('../img/dice-06.svg')
 
   .rollDice
     padding: 10px
@@ -311,20 +369,32 @@ body
 
 
       &:before
+        width: 20px
+        height: 20px
         top: 22px
         margin-left: -7.5px
+        padding: 3px
+        padding-left: 7px
+        color: white
+        font:
+          size: 1.3em
+          weight: 600
+        text-align: center
+        box-sizing: border-box
 
 
   .player0
     &.active
       &:before
-        left: 100%
+        content: "1"
+        left: 5vw
 
 
   .player1
     &.active
       &:before
-        left: 0%
+        content: "2"
+        right: 5vw
 
   .done
     height: 37vh
