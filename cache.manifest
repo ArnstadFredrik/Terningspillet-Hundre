@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # Terningspill cachefile
-# version 0.0.1.5
+# version 0.0.1.6
 assets/css/main.css
 
 assets/ico/apple-touch-icon.png
@@ -22,5 +22,5 @@ assets/img/player2/dice-06.svg
 
 assets/js/section4/pigGame.js
 
-NETWORK:
-https://fonts.googleapis.com/css?family=Roboto:300,400,700
+# NETWORK:
+# https://fonts.googleapis.com/css?family=Roboto:300,400,700
