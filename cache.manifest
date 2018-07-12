@@ -1,11 +1,11 @@
 CACHE MANIFEST
 # Terningspill cachefile
-# version 0.0.1.2
+# version 0.0.1.3
 
 assets/css/main.css
 
 assets/ico/apple-touch-icon.png
-assets/ico/lauchScreen.png
+assets/ico/launchScreen.png
 
 assets/img/player1/dice-01.svg
 assets/img/player1/dice-02.svg
