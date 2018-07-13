@@ -1,9 +1,76 @@
-let scores = [0,0];
-let current = 0;
-let player = 0;
-let goal = 100;
+let scores = [];
+let current;
+let player;
+let goal;
 
-pushDefault()
+let oneName;
+let twoName;
+
+const game = {
+  domElement: {
+    playerOneName: document.getElementById('player0Name').value,
+    playerTwoName: document.getElementById('player1Name').value,
+    scoreBoardNameOne: document.querySelector('.nameOne'),
+    scoreBoardNameTwo: document.querySelector('.nameTwo'),
+    menu: document.querySelector('.menu'),
+    player0: document.querySelector('.player0'),
+    player1: document.querySelector('.player1')
+  },
+}
+
+if(localStorage.length === 0) {
+  scores = [0,0];
+  current = 0;
+  player = 0;
+  goal = 110;
+
+  oneName = game.domElement.playerOneName;
+  twoName = game.domElement.playerTwoName;
+
+  saveSetting();
+  storeLocaly();
+  setValues();
+  initGame();
+}
+else{
+  setValues();
+  initGame();
+}
+
+
+pushDefault();
+//saveSetting();
+
+function storeLocaly() {
+  localStorage.setItem('scores',scores);
+  localStorage.setItem('current',current);
+  localStorage.setItem('player',player);
+  localStorage.setItem('goal',goal);
+  localStorage.setItem('oneName',oneName);
+  localStorage.setItem('twoName',twoName);
+}
+function setValues() {
+  tempScores = localStorage.getItem('scores');
+  current = Number(localStorage.getItem('current'));
+  player = Number(localStorage.getItem('player'));
+  goal = Number(localStorage.getItem('goal'));
+  oneName = localStorage.getItem('oneName');
+  twoName = localStorage.getItem('twoName');
+
+  tempScores = tempScores.split(',')
+  scores.length = 0;
+
+  for (let num of tempScores)
+    scores.push(Number(num));
+
+  playerOne = document.querySelector('.nameOne');
+  playerTwo = document.querySelector('.nameTwo');
+
+  playerOne.innerHTML = oneName;
+  playerTwo.innerHTML = twoName;
+
+  return scores,current,player,goal,oneName,twoName;
+}
 
 function debug() {
   scores = [43,92];
@@ -28,6 +95,31 @@ function resetGame() {
   addActive();
 
   document.querySelector('.done').remove();
+  storeLocaly();
+}
+
+function initGame(){
+  updateCurrentScore(current);
+
+  target = document.querySelector(`.score0`);
+  target.innerHTML = scores[0];
+
+  target = document.querySelector(`.score1`);
+  target.innerHTML = scores[1];
+
+  game.domElement.menu.className = `menu menu${player}`;
+  game.domElement.player0.classList.remove('active');
+  game.domElement.player0.classList.add('passive');
+  game.domElement.player1.classList.remove('active');
+  game.domElement.player1.classList.add('passive');
+
+  if (player === 0) {
+    game.domElement.player0.classList.add('active');
+    game.domElement.player0.classList.remove('passive');
+  } else {
+    game.domElement.player1.classList.add('active');
+    game.domElement.player1.classList.remove('passive');
+  }
 }
 
 function updateCurrentScore(score) {
@@ -40,11 +132,11 @@ function currentScore(currentScore) {
     updateCurrentScore(current);
     hold(current);
   }
-  else
+  else {
     current += currentScore;
-
-  updateCurrentScore(current);
-  console.log(current);
+    updateCurrentScore(current);
+  }
+  storeLocaly();
 }
 
 function removeActive() {
@@ -146,7 +238,6 @@ function setDice(dice) {
       break;
   }
 
-  console.log(target.className);
   currentScore(dice);
 }
 
@@ -171,20 +262,17 @@ function pushDefault() {
   newGoal.setAttribute('value',`${goal}`);
 }
 
-function setDefault() {
-  let oneName = document.getElementById(`player0Name`).value;
-  let twoName = document.getElementById(`player1Name`).value;
-  let newGoal = document.getElementById('goal').value;
+function saveSetting() {
+  oneName = document.getElementById(`player0Name`).value;
+  twoName = document.getElementById(`player1Name`).value;
+  newGoal = document.getElementById('goal').value;
 
-  let playerOne = document.querySelector('.nameOne');
-  let playerTwo = document.querySelector('.nameTwo');
+  game.domElement.scoreBoardNameOne.innerHTML = oneName;
+  game.domElement.scoreBoardNameTwo.innerHTML = twoName;
 
-  if (oneName != '')
-    playerOne.innerHTML = oneName;
-  if (twoName != '')
-    playerTwo.innerHTML = twoName;
-  if (newGoal != "")
-    goal = newGoal;
+  localStorage.setItem('oneName',oneName);
+  localStorage.setItem('twoName',twoName);
 
   closeSettings();
+
 }
