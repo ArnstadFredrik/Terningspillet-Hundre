@@ -22,7 +22,7 @@ if(localStorage.length === 0) {
   scores = [0,0];
   current = 0;
   player = 0;
-  goal = 110;
+  goal = 100;
 
   oneName = game.domElement.playerOneName;
   twoName = game.domElement.playerTwoName;
