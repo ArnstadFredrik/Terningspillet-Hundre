@@ -23,8 +23,8 @@ html(manifest="cache.manifest" type="text/manifest")
     .settingsButton.open
       button(onClick="showSettings()") Innstillinger
     .settings.close
-      input(value="Spiller 1")#player0Name
-      input(value="Spiller 2")#player1Name
+      input(placeholder="Spiller 1")#player0Name
+      input(placeholder="Spiller 2")#player1Name
       input(placeholder="Mål")#goal
       button(onClick="saveSetting()").submitt Lagre
       button(onClick="closeSettings()") Lukk

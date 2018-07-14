@@ -1,3 +1,5 @@
+console.log(localStorage);
+
 let scores = [];
 let current;
 let player;
@@ -9,12 +11,15 @@ let twoName;
 const game = {
   domElement: {
     playerOneName: document.getElementById('player0Name').value,
+    playerOneField: document.getElementById('player0Name'),
     playerTwoName: document.getElementById('player1Name').value,
+    playerTwoField: document.getElementById('player1Name'),
     scoreBoardNameOne: document.querySelector('.nameOne'),
     scoreBoardNameTwo: document.querySelector('.nameTwo'),
     menu: document.querySelector('.menu'),
     player0: document.querySelector('.player0'),
-    player1: document.querySelector('.player1')
+    player1: document.querySelector('.player1'),
+    newGoal: document.getElementById('goal'),
   },
 }
 
@@ -24,10 +29,14 @@ if(localStorage.length === 0) {
   player = 0;
   goal = 100;
 
-  oneName = game.domElement.playerOneName;
-  twoName = game.domElement.playerTwoName;
 
-  saveSetting();
+  if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
+  else oneName = game.domElement.playerOneName;
+
+  if(game.domElement.playerTwoName == '') twoName = 'Spiller 2';
+  else twoName = game.domElement.playerTwoName;
+
+
   storeLocaly();
   setValues();
   initGame();
@@ -211,6 +220,7 @@ function hold(score){
   updateCurrentScore(current);
   checkWinner();
   changePlayer(player);
+  storeLocaly();
   return current;
 }
 
@@ -258,8 +268,9 @@ function closeSettings() {
 }
 
 function pushDefault() {
-  let newGoal = document.getElementById('goal');
-  newGoal.setAttribute('value',`${goal}`);
+  game.domElement.newGoal.setAttribute('value',`${goal}`);
+  game.domElement.playerOneField.setAttribute('value',`${oneName}`);
+  game.domElement.playerTwoField.setAttribute('value',`${twoName}`);
 }
 
 function saveSetting() {
@@ -267,11 +278,14 @@ function saveSetting() {
   twoName = document.getElementById(`player1Name`).value;
   newGoal = document.getElementById('goal').value;
 
+  goal = newGoal;
+
   game.domElement.scoreBoardNameOne.innerHTML = oneName;
   game.domElement.scoreBoardNameTwo.innerHTML = twoName;
 
   localStorage.setItem('oneName',oneName);
   localStorage.setItem('twoName',twoName);
+  localStorage.setItem('goal',goal);
 
   closeSettings();
 

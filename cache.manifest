@@ -1,12 +1,15 @@
 CACHE MANIFEST
 # Terningspill cachefile
-# version 0.0.1.25
+# version 0.0.1.30
 
+# CSS styling
 assets/css/main.css
 
+# Apple webClip icon and launch screen
 assets/ico/apple-touch-icon.png
 assets/ico/launchScreen.png
 
+# Player one dice img
 assets/img/player1/dice-01.svg
 assets/img/player1/dice-02.svg
 assets/img/player1/dice-03.svg
@@ -14,6 +17,7 @@ assets/img/player1/dice-04.svg
 assets/img/player1/dice-05.svg
 assets/img/player1/dice-06.svg
 
+# Player two dice img
 assets/img/player2/dice-01.svg
 assets/img/player2/dice-02.svg
 assets/img/player2/dice-03.svg
@@ -21,4 +25,5 @@ assets/img/player2/dice-04.svg
 assets/img/player2/dice-05.svg
 assets/img/player2/dice-06.svg
 
+# JavaScript
 assets/js/section4/pigGame.js
