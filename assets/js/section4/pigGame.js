@@ -278,6 +278,7 @@ function saveSetting() {
   twoName = document.getElementById(`player1Name`).value;
   newGoal = document.getElementById('goal').value;
 
+  // storing user set newGoal back to games goal variable
   goal = newGoal;
 
   game.domElement.scoreBoardNameOne.innerHTML = oneName;
