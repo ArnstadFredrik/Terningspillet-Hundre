@@ -1,2 +1,2 @@
-- show next plsyer score on mobile
-- add homescreen icon ios
+
+- change settibg menu, inputs cant have hsrdcoded value. messes with localstorage
