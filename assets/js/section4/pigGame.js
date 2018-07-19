@@ -20,14 +20,46 @@ const game = {
     player0: document.querySelector('.player0'),
     player1: document.querySelector('.player1'),
     newGoal: document.getElementById('goal'),
+    welcome: document.getElementById('welcome'),
   },
 }
 
+function welcomeScreen(){
+  let welcome = document.createElement('div');
+  welcome.setAttribute('id','welcome');
+  paragraph = document.createElement('p');
+  welcome.innerHTML = `<h3>Terningsspillet</h3>
+    <p>Det er om å gjøre å bli førstemann til 100 poeng</p>
+    <p>Du kan trille så mange ganger du vil pr runde, men poengene må «beholdes», for triller du 1 så mister du denne rundens poeng.</p>
+    <p>Navn på spillere og poenggrense kan endres i innstillengene nederst på siden.</p>`;
+
+  h = document.createElement('h2');
+  pOne = document.createElement('p');
+  pTwo = document.createElement('p');
+
+  hContent = document.createTextNode('');
+  pOneContent = document.createTextNode('');
+  pTwoContetn = document.createTextNode('');
+
+  let closeBtn = document.createElement('button');
+  closeBtn.innerHTML = 'close';
+  closeBtn.setAttribute('onClick','removeWelcomeScreen()');
+
+  welcome.appendChild(closeBtn);
+
+  document.body.appendChild(welcome);
+}
+function removeWelcomeScreen() {
+  document.getElementById('welcome').remove();
+}
+
 if(localStorage.length === 0) {
+  welcomeScreen();
   scores = [0,0];
   current = 0;
   player = 0;
   goal = 100;
+  visited = true;
 
 
   if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
@@ -42,6 +74,10 @@ if(localStorage.length === 0) {
   initGame();
 }
 else{
+  if(!localStorage.visited) {
+    welcomeScreen();
+    localStorage.setItem('visited',true);
+  };
   setValues();
   initGame();
 }
@@ -57,6 +93,7 @@ function storeLocaly() {
   localStorage.setItem('goal',goal);
   localStorage.setItem('oneName',oneName);
   localStorage.setItem('twoName',twoName);
+  localStorage.setItem('visited', true);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -77,6 +114,8 @@ function setValues() {
 
   playerOne.innerHTML = oneName;
   playerTwo.innerHTML = twoName;
+
+  visited = localStorage.getItem('visited');
 
   return scores,current,player,goal,oneName,twoName;
 }

@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # Terningspill cachefile
-# version 0.0.1.38
+# version 0.0.1.41
 
 # CSS styling
 assets/css/main.css
@@ -29,4 +29,4 @@ assets/img/player2/dice-06.svg
 assets/js/section4/pigGame.js
 
 NETWORK:
-https://fonts.googleapis.com/css
+https://fonts.googleapis.com/css/
