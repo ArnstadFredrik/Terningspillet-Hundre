@@ -14,6 +14,13 @@ body {
   background: #f7f7f7;
 }
 
+body h1,
+body h2,
+body h3,
+body h4 {
+  text-transform: uppercase;
+}
+
 body button {
   background: white;
   border: none;
@@ -348,6 +355,15 @@ body input {
   width: 100%;
   height: 50px;
   box-sizing: border-box;
+}
+
+#welcome h3,
+#welcome strong {
+  color: #cc3700;
+}
+
+#welcome span {
+  font-style: italic;
 }
 
 @media (max-width: 420px) {

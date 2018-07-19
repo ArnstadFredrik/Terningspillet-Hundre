@@ -19,6 +19,12 @@ $mainTwoDark: darken($mainTwo, 10%)
 $mainTwoLight: lighten($mainTwo, 35%)
 
 body
+  h1,
+  h2,
+  h3,
+  h4
+    text-transform: uppercase
+
   display: grid
   grid-template-rows: auto
   grid-gap: 20px
@@ -312,6 +318,13 @@ body
     width: 100%
     height: 50px
     box-sizing: border-box
+
+  h3,
+  strong
+    color: $mainOneDark
+
+  span
+    font-style: italic
 
 @media ($res-small)
   body

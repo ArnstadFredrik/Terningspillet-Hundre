@@ -1,5 +1,3 @@
-console.log(localStorage);
-
 let scores = [];
 let current;
 let player;
@@ -29,8 +27,9 @@ function welcomeScreen(){
   welcome.setAttribute('id','welcome');
   paragraph = document.createElement('p');
   welcome.innerHTML = `<h3>Terningsspillet</h3>
-    <p>Det er om å gjøre å bli førstemann til 100 poeng</p>
-    <p>Du kan trille så mange ganger du vil pr runde, men poengene må «beholdes», for triller du 1 så mister du denne rundens poeng.</p>
+    <p>Det er om å gjøre å bli førstemann til <strong>100 poeng</strong></p>
+    <p>Du kan trille så mange ganger du vil pr runde, men poengene må <span>«beholdes»</span></p>
+    <p>Triller du <strong>1</strong> så mister du denne rundens poeng.</p>
     <p>Navn på spillere og poenggrense kan endres i innstillengene nederst på siden.</p>`;
 
   h = document.createElement('h2');
