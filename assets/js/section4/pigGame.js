@@ -42,7 +42,7 @@ function welcomeScreen(){
   pTwoContetn = document.createTextNode('');
 
   let closeBtn = document.createElement('button');
-  closeBtn.innerHTML = 'close';
+  closeBtn.innerHTML = 'Lukk';
   closeBtn.setAttribute('onClick','removeWelcomeScreen()');
 
   welcome.appendChild(closeBtn);
