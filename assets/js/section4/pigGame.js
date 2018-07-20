@@ -349,6 +349,7 @@ function saveSetting() {
 
 }
 
+/*
 function ai(){
   setTimeout(function(){
     if (current < 12) {
@@ -359,3 +360,4 @@ function ai(){
     };
   }, 500);
 }
+*/
