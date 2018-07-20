@@ -356,12 +356,6 @@ function ai(){
     }
     else {
       hold(current);
-      break;
     };
   }, 500);
-}
-
-function readyPlayerOne(){
-  while (player == 1)
-        ai();
 }
