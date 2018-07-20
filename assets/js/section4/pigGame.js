@@ -2,6 +2,7 @@ let scores = [];
 let current;
 let player;
 let goal;
+let done;
 
 let oneName;
 let twoName;
@@ -59,6 +60,7 @@ if(localStorage.length === 0) {
   player = 0;
   goal = 100;
   visited = true;
+  done = false;
 
 
   if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
@@ -93,6 +95,7 @@ function storeLocaly() {
   localStorage.setItem('oneName',oneName);
   localStorage.setItem('twoName',twoName);
   localStorage.setItem('visited', true);
+  localStorage.setItem('done',done);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -115,6 +118,7 @@ function setValues() {
   playerTwo.innerHTML = twoName;
 
   visited = localStorage.getItem('visited');
+  done = (localStorage.getItem('done')||false);
 
   return scores,current,player,goal,oneName,twoName;
 }
@@ -132,14 +136,29 @@ function rollDice() {
   return dice
 }
 
-function resetGame() {
-  removeActive();
-  scores = [0,0];
-  current = 0;
-  player = 0;
+function resetGame(isOver) {
+  if(isOver == true) {
+    removeActive();
+    document.getElementById('approve').remove();
 
-  resetScore();
-  addActive();
+    scores = [0,0];
+    current = 0;
+    player = 0;
+    done = false
+
+    resetScore();
+    addActive();
+    updateCurrentScore();
+  } else {
+    let approveWindow = document.createElement('div');
+    approveWindow.setAttribute('id','approve');
+    approveWindow.innerHTML = `
+    <p>Vil du starte på nytt?</p>
+    <button onClick="resetGame(true);">Ja</button>
+    <button onClick="document.getElementById('approve').remove();">Nei</button>
+    `;
+    document.body.appendChild(approveWindow);
+  }
 
   document.querySelector('.done').remove();
   storeLocaly();
@@ -328,4 +347,21 @@ function saveSetting() {
 
   closeSettings();
 
+}
+
+function ai(){
+  setTimeout(function(){
+    if (current < 12) {
+      setDice(rollDice());
+    }
+    else {
+      hold(current);
+      break;
+    };
+  }, 500);
+}
+
+function readyPlayerOne(){
+  while (player == 1)
+        ai();
 }

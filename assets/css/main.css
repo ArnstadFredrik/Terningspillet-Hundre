@@ -335,7 +335,7 @@ body input {
   box-sizing: border-box;
 }
 
-#welcome {
+#welcome, #approve {
   position: fixed;
   top: 5vw;
   left: 5vw;
@@ -351,18 +351,20 @@ body input {
   z-index: 100;
 }
 
-#welcome button {
+#welcome button, #approve button {
   width: 100%;
   height: 50px;
   box-sizing: border-box;
+  margin-top: 20px;
 }
 
 #welcome h3,
-#welcome strong {
+#welcome strong, #approve h3,
+#approve strong {
   color: #cc3700;
 }
 
-#welcome span {
+#welcome span, #approve span {
   font-style: italic;
 }
 
@@ -395,6 +397,9 @@ body input {
     -webkit-border: none;
     border-radius: 0px;
     -webkit-border-radius: 0px;
+  }
+  .settings button {
+    padding: 10px;
   }
   .open {
     display: grid;
