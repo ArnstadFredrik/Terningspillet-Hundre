@@ -1,5 +1,5 @@
 
-<html manifest="cache.manifest" type="text/manifest">
+<html manifest="man" type="text/manifest">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="menu menu0">
-      <button onClick="resetGame()" class="newGame">Ny runde</button>
+      <button onClick="resetGame(isDone)" class="newGame">Ny runde</button>
       <div class="dice one"></div>
       <button onClick="setDice(rollDice())" id="rollDice" class="rollDice">Trill terning</button>
       <button onClick="hold(current)" class="hold">Behold</button>

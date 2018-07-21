@@ -1,5 +1,5 @@
 //output: pigGame.html
-html(manifest="cache.manifest" type="text/manifest")
+html(manifest="man" type="text/manifest")
   head
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
@@ -17,7 +17,7 @@ html(manifest="cache.manifest" type="text/manifest")
     title Terningspill
   body
     .menu.menu0
-      button(onClick="resetGame()").newGame Ny runde
+      button(onClick="resetGame(isDone)").newGame Ny runde
       .dice.one
       button(onClick="setDice(rollDice())").rollDice#rollDice Trill terning
       button(onClick="hold(current)").hold Behold

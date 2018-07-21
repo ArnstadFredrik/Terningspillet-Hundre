@@ -2,7 +2,7 @@ let scores = [];
 let current;
 let player;
 let goal;
-let done;
+let isDone;
 
 let oneName;
 let twoName;
@@ -60,7 +60,7 @@ if(localStorage.length === 0) {
   player = 0;
   goal = 100;
   visited = true;
-  done = false;
+  isDone = false;
 
 
   if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
@@ -95,7 +95,7 @@ function storeLocaly() {
   localStorage.setItem('oneName',oneName);
   localStorage.setItem('twoName',twoName);
   localStorage.setItem('visited', true);
-  localStorage.setItem('done',done);
+  localStorage.setItem('isDone',isDone);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -118,13 +118,16 @@ function setValues() {
   playerTwo.innerHTML = twoName;
 
   visited = localStorage.getItem('visited');
-  done = (localStorage.getItem('done')||false);
 
-  return scores,current,player,goal,oneName,twoName;
+  isDone = localStorage.getItem('isDone');
+  if (isDone === 'false') isDone = false;
+  else isDone = true;
+
+  return scores,current,player,goal,oneName,twoName, visited, isDone;
 }
 
 function debug() {
-  scores = [43,92];
+  scores = [43,98];
   setScore();
   changePlayer(player);
   setScore();
@@ -137,18 +140,26 @@ function rollDice() {
 }
 
 function resetGame(isOver) {
-  if(isOver == true) {
+  if(isOver === true) {
+
     removeActive();
-    document.getElementById('approve').remove();
 
     scores = [0,0];
     current = 0;
     player = 0;
-    done = false
+    isDone = false;
 
     resetScore();
     addActive();
     updateCurrentScore();
+
+    let doneScreen = document.querySelector('.done');
+    if (doneScreen) doneScreen.remove();
+    let approveScreen = document.getElementById('approve');
+    if (approveScreen) approveScreen.remove();
+
+    storeLocaly();
+
   } else {
     let approveWindow = document.createElement('div');
     approveWindow.setAttribute('id','approve');
@@ -158,10 +169,8 @@ function resetGame(isOver) {
     <button onClick="document.getElementById('approve').remove();">Nei</button>
     `;
     document.body.appendChild(approveWindow);
-  }
+  };
 
-  document.querySelector('.done').remove();
-  storeLocaly();
 }
 
 function initGame(){
@@ -211,8 +220,6 @@ function removeActive() {
 
   activeMenu = document.querySelector(`.menu${player}`)
   activeMenu.className = `menu`;
-
-  console.log(activePlayer);
 }
 
 function addActive() {
@@ -221,8 +228,6 @@ function addActive() {
 
   activeMenu = document.querySelector(`.menu`)
   activeMenu.className = `menu menu${player}`;
-
-  console.log(activePlayer);
 }
 
 function changePlayer(activePlayer) {
@@ -254,6 +259,7 @@ function setScore() {
 function checkWinner() {
   if (scores[player] >= goal) {
     createDoneScreen();
+    isDone = true;
   };
 }
 
@@ -265,7 +271,7 @@ function createDoneScreen() {
     winner = `Spiller ${player+1}`
 
   done.setAttribute('class',`done done${player}`);
-  done.innerHTML = `Gratulerer ${winner}. Du vant med ${scores[player]} poeng.`;
+  done.innerHTML = `<p>Gratulerer <strong>${winner}.</strong> </br>Du vant med <strong>${scores[player]} poeng.</strong></p>`;
   document.body.appendChild(done);
   console.log('Game is done');
 }
@@ -349,7 +355,6 @@ function saveSetting() {
 
 }
 
-/*
 function ai(){
   setTimeout(function(){
     if (current < 12) {
@@ -360,4 +365,3 @@ function ai(){
     };
   }, 500);
 }
-*/
