@@ -86,7 +86,7 @@ body
 .settings
   position: relative
   display: none
-  font-size: 1.5em
+  font-size: 1.1rem
   width: 90vw
   display: grid
   grid-row: 1
@@ -98,6 +98,67 @@ body
 
   input
     font-size: 0.8em
+
+.gameMode
+  $checkboxSize: 40px
+  text-transform: uppercase
+  font-size: 0.8em
+
+  .checkbox,.checked
+    display: inline-block
+    height: $checkboxSize
+    width: $checkboxSize
+
+  .checkbox
+    padding: 5px
+    background-color: white
+    border-radius: 0px
+
+  .checked
+    position: relative
+    width: $checkboxSize
+    height: $checkboxSize
+
+    &:before,&:after
+      content: ""
+      position: relative
+      width: $checkboxSize
+      height: $checkboxSize
+      display: block
+
+    &:before
+      top: 0
+      left: 0
+      background: $containerColor
+
+    .i
+      position: absolute
+      transform: rotate(-45deg)
+      transform-origin: top
+      bottom: 22px
+      left: 16px
+      background: $fontColor
+      height: 6px
+      width: $checkboxSize - 20
+      margin: 0
+      padding: 0
+
+      &:before
+        content: ""
+        display: block
+        position: absolute
+        bottom: 6px
+        left: -2px
+        width: 10px
+        height: 6px
+        transform: rotate(90deg)
+        background: $fontColor
+
+  .lable
+    display: inline-block
+    position: relative
+    top: -($checkboxSize/2)
+    margin-left: 20px
 
 .close
   display: none

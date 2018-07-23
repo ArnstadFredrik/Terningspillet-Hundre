@@ -20,8 +20,8 @@
     <div class="menu menu0">
       <button onClick="resetGame(isDone)" class="newGame">Ny runde</button>
       <div class="dice one"></div>
-      <button onClick="setDice(rollDice())" id="rollDice" class="rollDice">Trill terning</button>
-      <button onClick="hold(current)" class="hold">Behold</button>
+      <button onClick="setDice(rollDice());closeSettings();" id="rollDice" class="rollDice">Trill terning</button>
+      <button onClick="hold(current);" class="hold">Behold</button>
     </div>
     <div class="settingsButton open">
       <button onClick="showSettings()">Innstillinger</button>
@@ -30,6 +30,12 @@
       <input placeholder="Spiller 1" id="player0Name"/>
       <input placeholder="Spiller 2" id="player1Name"/>
       <input placeholder="Mål" id="goal"/>
+      <div class="gameMode">
+        <div class="checkbox">
+          <div class="i"></div>
+        </div>
+        <div class="lable">Enspiller</div>
+      </div>
       <button onClick="saveSetting()" class="submitt">Lagre</button>
       <button onClick="closeSettings()">Lukk</button>
       <button onClick="welcomeScreen()">Instruksjoner</button>

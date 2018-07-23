@@ -19,8 +19,8 @@ html(manifest="man" type="text/manifest")
     .menu.menu0
       button(onClick="resetGame(isDone)").newGame Ny runde
       .dice.one
-      button(onClick="setDice(rollDice())").rollDice#rollDice Trill terning
-      button(onClick="hold(current)").hold Behold
+      button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
+      button(onClick="hold(current);").hold Behold
     
     .settingsButton.open
       button(onClick="showSettings()") Innstillinger
@@ -28,6 +28,10 @@ html(manifest="man" type="text/manifest")
       input(placeholder="Spiller 1")#player0Name
       input(placeholder="Spiller 2")#player1Name
       input(placeholder="Mål")#goal
+      .gameMode
+        .checkbox
+          .i
+        .lable Enspiller
       button(onClick="saveSetting()").submitt Lagre
       button(onClick="closeSettings()") Lukk
       button(onClick="welcomeScreen()") Instruksjoner

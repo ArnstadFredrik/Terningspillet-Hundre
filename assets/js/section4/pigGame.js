@@ -3,6 +3,7 @@ let current;
 let player;
 let goal;
 let isDone;
+let gameMode;
 
 let oneName;
 let twoName;
@@ -20,6 +21,8 @@ const game = {
     player1: document.querySelector('.player1'),
     newGoal: document.getElementById('goal'),
     welcome: document.getElementById('welcome'),
+    checkbox: document.querySelector('.checkbox'),
+    diceElement: document.querySelector('.dice')
   },
 }
 
@@ -61,6 +64,7 @@ if(localStorage.length === 0) {
   goal = 100;
   visited = true;
   isDone = false;
+  gameMode = 0;
 
 
   if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
@@ -96,6 +100,7 @@ function storeLocaly() {
   localStorage.setItem('twoName',twoName);
   localStorage.setItem('visited', true);
   localStorage.setItem('isDone',isDone);
+  localStorage.setItem('gameMode',gameMode);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -123,11 +128,13 @@ function setValues() {
   if (isDone === 'false') isDone = false;
   else isDone = true;
 
-  return scores,current,player,goal,oneName,twoName, visited, isDone;
+  gameMode = Number(localStorage.getItem('gameMode'));
+
+  return scores,current,player,goal,oneName,twoName, visited, isDone, gameMode;
 }
 
 function debug() {
-  scores = [43,98];
+  scores = [70,50];
   setScore();
   changePlayer(player);
   setScore();
@@ -195,6 +202,10 @@ function initGame(){
     game.domElement.player1.classList.add('active');
     game.domElement.player1.classList.remove('passive');
   }
+
+  if(gameMode === 1) {
+    game.domElement.playerTwoField.style = 'display:none;';
+  }
 }
 
 function updateCurrentScore(score) {
@@ -235,11 +246,13 @@ function changePlayer(activePlayer) {
     case 0:
       removeActive();
       player = 1;
+      console.log(`Player ${player+1} is now playing`);
       addActive();
       break;
     case 1:
       removeActive();
       player = 0;
+      console.log(`Player ${player+1} is now playing`);
       addActive();
       break;
   };
@@ -253,7 +266,7 @@ function resetScore() {
 function setScore() {
   target = document.querySelector(`.score${player}`);
   target.innerHTML = scores[player];
-  console.log(scores[player]);
+  console.log('setting score for player:',player + 1,scores[player]);
 }
 
 function checkWinner() {
@@ -277,41 +290,43 @@ function createDoneScreen() {
 }
 
 function hold(score){
-  scores[player] += score;
-  setScore();
-  current = 0;
-  updateCurrentScore(current);
-  checkWinner();
-  changePlayer(player);
-  storeLocaly();
-  return current;
+    scores[player] += score;
+    setScore();
+    current = 0;
+    updateCurrentScore(current);
+    checkWinner();
+    changePlayer(player);
+    storeLocaly();
+
+    return ai();
 }
 
 function setDice(dice) {
-  let target = document.querySelector('.dice')
+    let target = document.querySelector('.dice')
 
-  switch (dice) {
-    case 1:
+    switch (dice) {
+      case 1:
       target.className = 'dice one'
       break;
-    case 2:
+      case 2:
       target.className = 'dice two'
       break;
-    case 3:
+      case 3:
       target.className = 'dice three'
       break;
-    case 4:
+      case 4:
       target.className = 'dice four'
       break;
-    case 5:
+      case 5:
       target.className = 'dice five'
       break;
-    case 6:
+      case 6:
       target.className = 'dice six'
       break;
-  }
+    }
 
-  currentScore(dice);
+    console.log('du trillte,',dice);
+    currentScore(dice);
 }
 
 function showSettings() {
@@ -334,6 +349,11 @@ function pushDefault() {
   game.domElement.newGoal.setAttribute('value',`${goal}`);
   game.domElement.playerOneField.setAttribute('value',`${oneName}`);
   game.domElement.playerTwoField.setAttribute('value',`${twoName}`);
+
+  if(gameMode === 1) {
+    game.domElement.checkbox.classList.add('checked');
+  }
+
 }
 
 function saveSetting() {
@@ -356,12 +376,52 @@ function saveSetting() {
 }
 
 function ai(){
-  setTimeout(function(){
-    if (current < 12) {
+  if (gameMode === 1 && isDone === false){
+    let temp = Math.round((Math.random() * (21 - 6+1) + 6));
+    console.log('ai random goal',temp);
+
+    while (player === 1 && current < temp ) {
       setDice(rollDice());
-    }
-    else {
-      hold(current);
+      console.log('current',current);
     };
-  }, 500);
+    if(player === 1)
+      return hold(current);
+  }
+}
+
+function toggleGameMode() {
+  gameModeCheckbox = document.querySelector('.checkbox');
+  gameModeCheckbox.classList.toggle('checked');
+
+  if(gameModeCheckbox.classList.contains('checked')) {
+    gameMode = 1;
+    game.domElement.playerTwoField.style = 'display:none;';
+  }
+  else {
+    gameMode = 0;
+    game.domElement.playerTwoField.style = 'display:block;';
+  }
+
+  storeLocaly();
+}
+
+const el = document.querySelector('.checkbox');
+el.addEventListener('click',toggleGameMode,false);
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+function illustrateDiceRoll() {
+  game.domElement.diceElement.className = 'dice two';
+  sleep(800);
+  game.domElement.diceElement.className = 'dice six'
+  sleep(800);
+  game.domElement.diceElement.className = 'dice four';
+  sleep(800);
 }
