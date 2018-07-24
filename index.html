@@ -34,7 +34,7 @@
       <button onClick="setDice(rollDice());closeSettings();" id="rollDice" class="rollDice">Trill terning</button>
       <button onClick="hold(current);" class="hold">Behold</button>
     </div>
-    <div class="settingsButton open">
+    <div class="settingsButton show">
       <button onClick="showSettings()">Innstillinger</button>
     </div>
     <div class="settings close">
@@ -47,9 +47,9 @@
         </div>
         <div class="lable">Enspiller</div>
       </div>
-      <button onClick="saveSetting()" class="submitt">Lagre</button>
-      <button onClick="closeSettings()">Lukk</button>
       <button onClick="welcomeScreen()">Instruksjoner</button>
+      <button onClick="saveSetting()" class="submitt">Lagre</button>
+      <button onClick="closeSettings()" class="settingsClose">Lukk</button>
     </div>
     <div class="grid">
       <div class="player player0 active">

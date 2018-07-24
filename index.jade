@@ -38,7 +38,7 @@ html
       button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
       button(onClick="hold(current);").hold Behold
     
-    .settingsButton.open
+    .settingsButton.show
       button(onClick="showSettings()") Innstillinger
     .settings.close
       input(placeholder="Spiller 1")#player0Name
@@ -48,9 +48,9 @@ html
         .checkbox
           .i
         .lable Enspiller
-      button(onClick="saveSetting()").submitt Lagre
-      button(onClick="closeSettings()") Lukk
       button(onClick="welcomeScreen()") Instruksjoner
+      button(onClick="saveSetting()").submitt Lagre
+      button(onClick="closeSettings()").settingsClose Lukk
       
     
     .grid

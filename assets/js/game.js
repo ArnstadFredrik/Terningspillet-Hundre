@@ -32,15 +32,20 @@ const isInStandaloneMode = () => {
 if(isIos() && !isInStandaloneMode()) {
   console.log('need to install web app');
   let installBanner = document.createElement('div')
-  installBanner.setAttribute('class','banner installBanner');
+  installBanner.setAttribute('class','banner installBanner closeButton');
   installBanner.innerHTML = `
   <p>Du kan lagre dett spillet på telefonen.</br>
   Trykk <span class="share"></span>, deretter <span class="addToHomeScreen">«Legg til på Hjem-skjerm»</span>
   </p>
   `;
-  document.body.appendChild(installBanner)
+
+  document.body.appendChild(installBanner);
+
+  const bannerElement = document.querySelector('.installBanner');
+  bannerElement.addEventListener('click', e => {bannerElement.classList.add('animateDown');});
+
   setTimeout(()=> {
-    document.querySelector('.installBanner').classList.add('animateDown');
+    bannerElement.classList.add('animateDown');
   },10000);
 
 }
@@ -382,7 +387,7 @@ function closeSettings() {
   settings.className = "settings close"
 
   let settingsButton = document.querySelector('.settingsButton');
-  settingsButton.className = 'settingsButton open'
+  settingsButton.className = 'settingsButton show'
 }
 
 function pushDefault() {
