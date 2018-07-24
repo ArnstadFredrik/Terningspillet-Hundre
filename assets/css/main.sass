@@ -360,7 +360,7 @@ body
     padding: 10px
     box-sizing: border-box
 
-#welcome,#approve
+.banner
   position: fixed
   top: 5vw
   left: 5vw
@@ -374,6 +374,8 @@ body
   padding: 20px
   box-sizing: border-box
   z-index: 100
+
+#welcome,#approve
 
   button
     width: 100%
@@ -534,3 +536,47 @@ body
     margin-left: 0
     top: 38%
     font-size: 1em
+
+  .installBanner
+    bottom: 5vw
+    top: auto
+    font-size: 0.7rem
+
+    .closeButton
+      text-transform: uppercase
+      width: 100%
+      background:
+      position: absolute
+      top: 0
+      left: 0
+      padding: 7px
+      box-sizing: border-box
+
+    .share
+      display: inline-block
+      height: 25px
+      width: 25px
+      margin-left: 10px
+      position: relative
+      top: 6px
+
+      background:
+        image: url("../ico/share.png")
+        size: contain
+        repeat: no-repeat
+
+
+    .addToHomeScreen
+      font-weight: 600
+
+  .animateDown
+    animation: down 1s linear forwards
+
+    @keyframes down
+      0%
+        bottom: 5vw
+      10%
+        bottom: 15vw
+      35%,
+      100%
+        bottom: -50vw

@@ -8,6 +8,36 @@ let gameMode;
 let oneName;
 let twoName;
 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent)
+}
+
+const isInStandaloneMode = () => {
+  ('standalone' in  window.navigator) && (window.navigator.standalone)
+}
+
+if(isIos() && !isInStandaloneMode()) {
+  console.log('need to install web app');
+  let installBanner = document.createElement('div')
+  installBanner.setAttribute('class','banner installBanner');
+  installBanner.innerHTML = `
+  <div class="closeButton">Lukk</div>
+  <p>Du kan lagre dett spillet på telefonen.</br>
+  Trykk <span class="share"></span>, deretter <span class="addToHomeScreen">«Legg til på Hjem-skjerm»</span>
+  </p>
+  `;
+  console.log(installBanner);
+  document.body.appendChild(installBanner)
+  const installBannerClose = document.querySelector('.closeButton');
+  installBannerClose.addEventListener('click',() => {document.querySelector('.installBanner').remove()})
+
+  setTimeout(()=> {
+    document.querySelector('.installBanner').classList.add('animateDown');
+  },10000);
+}
+
+
 const game = {
   domElement: {
     playerOneName: document.getElementById('player0Name').value,
@@ -29,6 +59,7 @@ const game = {
 function welcomeScreen(){
   let welcome = document.createElement('div');
   welcome.setAttribute('id','welcome');
+  welcome.setAttribute('class','banner');
   paragraph = document.createElement('p');
   welcome.innerHTML = `<h3>Terningsspillet</h3>
     <p>Det er om å gjøre å bli førstemann til <strong>100 poeng</strong></p>
@@ -170,6 +201,7 @@ function resetGame(isOver) {
   } else {
     let approveWindow = document.createElement('div');
     approveWindow.setAttribute('id','approve');
+    approveWindow.setAttribute('class','banner');
     approveWindow.innerHTML = `
     <p>Vil du starte på nytt?</p>
     <button onClick="resetGame(true);">Ja</button>
@@ -407,21 +439,3 @@ function toggleGameMode() {
 
 const el = document.querySelector('.checkbox');
 el.addEventListener('click',toggleGameMode,false);
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
-function illustrateDiceRoll() {
-  game.domElement.diceElement.className = 'dice two';
-  sleep(800);
-  game.domElement.diceElement.className = 'dice six'
-  sleep(800);
-  game.domElement.diceElement.className = 'dice four';
-  sleep(800);
-}
