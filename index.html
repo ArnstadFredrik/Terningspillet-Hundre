@@ -1,4 +1,55 @@
 
-<body>
-  <script type="text/Javascript" src="assets/js/section2/23-tip.js"></script>
-</body>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.min.css"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="manifest" href="manifest.json"/>
+    <title>Terningspill</title>
+  </head>
+  <body>
+    <div class="menu menu0">
+      <button onClick="resetGame(isDone)" class="newGame">Ny runde</button>
+      <div class="dice one"></div>
+      <button onClick="setDice(rollDice());closeSettings();" id="rollDice" class="rollDice">Trill terning</button>
+      <button onClick="hold(current);" class="hold">Behold</button>
+    </div>
+    <div class="settingsButton open">
+      <button onClick="showSettings()">Innstillinger</button>
+    </div>
+    <div class="settings close">
+      <input placeholder="Spiller 1" id="player0Name"/>
+      <input placeholder="Spiller 2" id="player1Name"/>
+      <input placeholder="Mål" id="goal"/>
+      <div class="gameMode">
+        <div class="checkbox">
+          <div class="i"></div>
+        </div>
+        <div class="lable">Enspiller</div>
+      </div>
+      <button onClick="saveSetting()" class="submitt">Lagre</button>
+      <button onClick="closeSettings()">Lukk</button>
+      <button onClick="welcomeScreen()">Instruksjoner</button>
+    </div>
+    <div class="grid">
+      <div class="player player0 active">
+        <div id="player0" class="name nameOne">Spiller 1</div>
+        <div class="score score0">0</div>
+        <div class="current current0"> <span>Runde</span>
+          <p class="currentScore">0</p>
+        </div>
+      </div>
+      <div class="player player1 passive">
+        <div id="player1" class="name nameTwo">Spiller 2</div>
+        <div class="score score1">0</div>
+        <div class="current current1"> <span>Runde</span>
+          <p class="currentScore">0</p>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/game.js" type="text/javascript"></script>
+  </body>
+</html>

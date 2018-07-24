@@ -1,4 +1,49 @@
 //output: index.html
-
-body
-  script(type="text/Javascript" src="assets/js/section2/23-tip.js")
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet")
+    link(rel="stylesheet" type="text/css" href="assets/css/main.min.css")
+    link(rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon")
+    link(rel="icon" href="assets/ico/favicon.ico" type="image/x-icon")
+    link(rel="manifest" href="manifest.json")
+    title Terningspill
+  body
+    .menu.menu0
+      button(onClick="resetGame(isDone)").newGame Ny runde
+      .dice.one
+      button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
+      button(onClick="hold(current);").hold Behold
+    
+    .settingsButton.open
+      button(onClick="showSettings()") Innstillinger
+    .settings.close
+      input(placeholder="Spiller 1")#player0Name
+      input(placeholder="Spiller 2")#player1Name
+      input(placeholder="Mål")#goal
+      .gameMode
+        .checkbox
+          .i
+        .lable Enspiller
+      button(onClick="saveSetting()").submitt Lagre
+      button(onClick="closeSettings()") Lukk
+      button(onClick="welcomeScreen()") Instruksjoner
+      
+    
+    .grid
+      .player.player0.active
+        .name.nameOne#player0 Spiller 1
+        .score.score0 0
+        .current.current0 
+          span Runde
+          p.currentScore 0
+          
+      .player.player1.passive
+        .name.nameTwo#player1 Spiller 2
+        .score.score1 0
+        .current.current1 
+          span Runde
+          p.currentScore 0
+        
+    script(src="assets/js/game.js" type="text/javascript")
