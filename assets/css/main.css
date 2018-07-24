@@ -579,9 +579,23 @@ body input {
     font-size: 1em;
   }
   .installBanner {
-    bottom: 5vw;
+    bottom: 8vw;
     top: auto;
     font-size: 0.7rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .installBanner:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #f2f2f2;
+    box-shadow: 4px 4px 10px -2px #bbb;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    transform: rotate(45deg);
   }
   .installBanner .closeButton {
     text-transform: uppercase;

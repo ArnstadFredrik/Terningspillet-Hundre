@@ -1,3 +1,14 @@
+//terningspill
+window.addEventListener('load', e => {
+  if('serviceWorker' in window.navigator) {
+    try {
+      navigator.serviceWorker.register('sw.js');
+      console.log('sw reg sucsess');
+    } catch (e) {
+      console.log('sw reg failed');
+    }
+  };
+});
 let scores = [];
 let current;
 let player;
@@ -22,19 +33,15 @@ if(isIos() && !isInStandaloneMode()) {
   let installBanner = document.createElement('div')
   installBanner.setAttribute('class','banner installBanner');
   installBanner.innerHTML = `
-  <div class="closeButton">Lukk</div>
   <p>Du kan lagre dett spillet på telefonen.</br>
   Trykk <span class="share"></span>, deretter <span class="addToHomeScreen">«Legg til på Hjem-skjerm»</span>
   </p>
   `;
-  console.log(installBanner);
   document.body.appendChild(installBanner)
-  const installBannerClose = document.querySelector('.closeButton');
-  installBannerClose.addEventListener('click',() => {document.querySelector('.installBanner').remove()})
-
   setTimeout(()=> {
     document.querySelector('.installBanner').classList.add('animateDown');
   },10000);
+
 }
 
 
