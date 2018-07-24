@@ -1,3 +1,4 @@
+const v = '0.0.1';
 const cacheArray = [
   './',
   './assets/css/main.min.css',
@@ -17,7 +18,7 @@ const cacheArray = [
 
 ];
 self.addEventListener('install', async event => {
-  const cache = await caches.open('terningspill');
+  const cache = await caches.open(`terningspill ${v}`);
   cache.addAll(cacheArray);
 });
 

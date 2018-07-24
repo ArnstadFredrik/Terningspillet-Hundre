@@ -1,4 +1,4 @@
-//terningspill 0.0.1
+//terningspill
 window.addEventListener('load', e => {
   if('serviceWorker' in window.navigator) {
     try {
