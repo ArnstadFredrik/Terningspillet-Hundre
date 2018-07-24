@@ -1,4 +1,4 @@
-//terningspill
+//terningspill 0.0.1
 window.addEventListener('load', e => {
   if('serviceWorker' in window.navigator) {
     try {
@@ -9,6 +9,7 @@ window.addEventListener('load', e => {
     }
   };
 });
+
 let scores = [];
 let current;
 let player;
@@ -25,8 +26,12 @@ const isIos = () => {
 }
 
 const isInStandaloneMode = () => {
-  ('standalone' in  window.navigator)
-}
+  let standalone = window.navigator.standalone;
+  if(standalone === undefined)
+    return false
+  else
+    return true
+};
 
 if(isIos() && !isInStandaloneMode()) {
   console.log('need to install web app');
