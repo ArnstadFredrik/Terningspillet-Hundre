@@ -26,11 +26,7 @@ const isIos = () => {
 }
 
 const isInStandaloneMode = () => {
-  let standalone = window.navigator.standalone;
-  if(standalone === undefined)
-    return false
-  else
-    return true
+  return window.navigator.standalone;
 };
 
 if(isIos() && !isInStandaloneMode()) {
