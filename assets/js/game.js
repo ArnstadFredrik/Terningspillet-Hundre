@@ -329,7 +329,10 @@ function createDoneScreen() {
     winner = `Spiller ${player+1}`
 
   done.setAttribute('class',`done done${player}`);
-  done.innerHTML = `<p>Gratulerer <strong>${winner}.</strong> </br>Du vant med <strong>${scores[player]} poeng.</strong></p>`;
+  done.innerHTML = `
+  <p>Gratulerer <strong>${winner}.</strong>
+  </br>Du vant med <strong>${scores[player]} poeng.</strong></p>
+  <button onClick="resetGame(true)">Nytt spill</button>`;
   document.body.appendChild(done);
   console.log('Game is done');
 }
@@ -376,7 +379,7 @@ function setDice(dice) {
 
 function showSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings open"
+  settings.className = "settings open animateUpSettings"
 
   let settingsButton = document.querySelector('.settingsButton');
   settingsButton.className = 'settingsButton close'
@@ -384,7 +387,7 @@ function showSettings() {
 
 function closeSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings close"
+  settings.className = "settings open animateDownSettings"
 
   let settingsButton = document.querySelector('.settingsButton');
   settingsButton.className = 'settingsButton show'

@@ -160,10 +160,10 @@ body
     top: -($checkboxSize/2)
     margin-left: 20px
 
-.close
+//.close
   display: none
 
-.open
+//.open
   display: grid
 
 .done0
@@ -375,7 +375,7 @@ body
   box-sizing: border-box
   z-index: 100
 
-#welcome,#approve
+#welcome,#approve,
 
   button
     width: 100%
@@ -410,6 +410,7 @@ body
     padding: 20px
 
   .settings
+    height: 100vh
     display: grid
     grid-template-columns: 1fr
     grid-template-rows: repeat(7, 1fr)
@@ -430,13 +431,14 @@ body
   .open
     display: grid
     position: fixed
-    top: 0
     bottom: 0
-    left: 0
-    right: 0
     z-index: 100
+
   .close
-    display: none
+    top: auto
+    bottom: -100vh
+    position: fixed
+    z-index: 200
   .show
     display: grid
 
@@ -542,12 +544,22 @@ body
         right: 5vw
 
   .done
-    height: 37vh
+    height: 100vh
     width: 100vw
+    position: fixed
     left: 0
     margin-left: 0
-    top: 38%
+    top: 0
+    bottom: 0
     font-size: 1em
+    padding: 20px
+    box-sizing: border-box
+
+    button
+      width: 100%
+      height: 50px
+      box-sizing: border-box
+      margin-top: 20px
 
   .installBanner
     bottom: 8vw
@@ -597,7 +609,7 @@ body
       font-weight: 600
 
   .animateDown
-    animation: down 1s linear forwards
+    animation: down 1s ease-in-out forwards
 
     @keyframes down
       0%
@@ -607,3 +619,33 @@ body
       35%,
       100%
         bottom: -50vw
+
+  .animateUpSettings
+    animation: upSettings 0.5s ease-in-out forwards
+
+    @keyframes upSettings
+      0%
+        top: 150vh
+
+      100%
+        top: 0vh
+
+  .animateDownSettings
+    animation: downSettings 0.5s ease-in-out forwards
+
+    @keyframes downSettings
+      0%
+        top: 0vh
+
+      100%
+        top: 150vh
+
+  .animateOut
+    animation: out 0.5s ease-in-out forwards
+
+    @keyframes out
+      0%
+        left: 0vh
+
+      100%
+        left: 150vw
