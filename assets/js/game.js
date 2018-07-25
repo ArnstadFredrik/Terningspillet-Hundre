@@ -249,7 +249,9 @@ function initGame(){
   }
 
   if(gameMode === 1) {
-    game.domElement.playerTwoField.style = 'display:none;';
+    setTimeout(()=>{
+      game.domElement.playerTwoField.style = 'display:none;';
+    },500);
   }
 }
 
@@ -379,18 +381,12 @@ function setDice(dice) {
 
 function showSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings open animateUpSettings"
-
-  let settingsButton = document.querySelector('.settingsButton');
-  settingsButton.className = 'settingsButton close'
+  settings.className = "settings open animateUpSettings";
 }
 
 function closeSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings open animateDownSettings"
-
-  let settingsButton = document.querySelector('.settingsButton');
-  settingsButton.className = 'settingsButton show'
+  settings.className = "settings open animateDownSettings";
 }
 
 function pushDefault() {
@@ -443,15 +439,23 @@ function toggleGameMode() {
 
   if(gameModeCheckbox.classList.contains('checked')) {
     gameMode = 1;
-    game.domElement.playerTwoField.style = 'display:none;';
+    game.domElement.playerTwoField.classList.add('animateOut');
+    setTimeout(()=>{
+      game.domElement.playerTwoField.style = 'display:none;';
+      game.domElement.playerTwoField.classList.remove('animateOut');
+    },500)
   }
-  else {
+  else if(!gameModeCheckbox.classList.contains('checked')){
     gameMode = 0;
     game.domElement.playerTwoField.style = 'display:block;';
-  }
+    game.domElement.playerTwoField.classList.add('animateIn');
+    setTimeout(()=>{
+      game.domElement.playerTwoField.classList.remove('animateIn');
+    },500);
+  };
 
   storeLocaly();
 }
 
 const el = document.querySelector('.checkbox');
-el.addEventListener('click',toggleGameMode,false);
+el.addEventListener('click',toggleGameMode);

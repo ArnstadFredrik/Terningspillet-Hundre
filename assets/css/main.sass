@@ -641,11 +641,35 @@ body
         top: 150vh
 
   .animateOut
+    position: relative
     animation: out 0.5s ease-in-out forwards
 
     @keyframes out
       0%
         left: 0vh
+        grid-row: auto
+
+      99%
+        left: -100vw
+        grid-row: auto
 
       100%
-        left: 150vw
+        grid-row: none
+
+  .animateIn
+    position: relative
+    animation: in 0.5s ease-in-out forwards
+
+    @keyframes in
+      0%
+        left: -100vw
+        grid-row: auto
+        visibility: 0
+
+      99%
+        left: 0vh
+        grid-row: auto
+
+      100%
+        grid-row: none
+        visibility: 100
