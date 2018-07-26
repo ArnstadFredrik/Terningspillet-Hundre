@@ -160,19 +160,24 @@ function setValues() {
   twoName = localStorage.getItem('twoName');
   tempThrows = localStorage.getItem('throws');
 
+  if(tempThrows == null)
+    tempThrows = [0,0];
+  else {
+    //extracting throws from string
+    tempThrows = tempThrows.split(',');
+    throws.length = 0;
+
+    for (let num of tempThrows)
+    throws.push(Number(num));
+  }
+
   // extracting scores from string
-  tempScores = tempScores.split(',')
+  tempScores = tempScores.split(',');
   scores.length = 0;
 
   for (let num of tempScores)
     scores.push(Number(num));
 
-  //extracting throws from string
-  tempThrows = tempThrows.split(',')
-  throws.length = 0;
-
-  for (let num of tempThrows)
-    throws.push(Number(num));
 
   playerOne = document.querySelector('.nameOne');
   playerTwo = document.querySelector('.nameTwo');
