@@ -8,7 +8,7 @@ body {
   margin: 0;
   height: auto;
   width: 100vw;
-  font-family: "Roboto", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 14px;
   color: #4d4d4d;
   background: #f7f7f7;
@@ -27,7 +27,7 @@ body button {
   border-radius: 2px;
   color: #4d4d4d;
   letter-spacing: 2px;
-  font-family: "Roboto", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 0.8em;
   text-transform: uppercase;
   transition: all 0.3s;
@@ -46,7 +46,7 @@ body button:focus, body input:focus {
 
 body input {
   text-transform: uppercase;
-  font-family: "Roboto", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 0.8em;
   padding: 5px;
 }

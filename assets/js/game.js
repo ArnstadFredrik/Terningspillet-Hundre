@@ -11,6 +11,7 @@ window.addEventListener('load', e => {
 });
 
 let scores = [];
+let throws = [];
 let current;
 let player;
 let goal;
@@ -19,6 +20,7 @@ let gameMode;
 
 let oneName;
 let twoName;
+let tmpPlayerTwo;
 
 const isIos = () => {
   const userAgent = window.navigator.userAgent.toLowerCase();
@@ -103,6 +105,7 @@ function removeWelcomeScreen() {
 if(localStorage.length === 0) {
   welcomeScreen();
   scores = [0,0];
+  throws = [0,0];
   current = 0;
   player = 0;
   goal = 100;
@@ -145,6 +148,8 @@ function storeLocaly() {
   localStorage.setItem('visited', true);
   localStorage.setItem('isDone',isDone);
   localStorage.setItem('gameMode',gameMode);
+  localStorage.setItem('tmpPlayerTwo',tmpPlayerTwo);
+  localStorage.setItem('throws',throws);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -153,12 +158,21 @@ function setValues() {
   goal = Number(localStorage.getItem('goal'));
   oneName = localStorage.getItem('oneName');
   twoName = localStorage.getItem('twoName');
+  tempThrows = localStorage.getItem('throws');
 
+  // extracting scores from string
   tempScores = tempScores.split(',')
   scores.length = 0;
 
   for (let num of tempScores)
     scores.push(Number(num));
+
+  //extracting throws from string
+  tempThrows = tempThrows.split(',')
+  throws.length = 0;
+
+  for (let num of tempThrows)
+    throws.push(Number(num));
 
   playerOne = document.querySelector('.nameOne');
   playerTwo = document.querySelector('.nameTwo');
@@ -174,7 +188,13 @@ function setValues() {
 
   gameMode = Number(localStorage.getItem('gameMode'));
 
-  return scores,current,player,goal,oneName,twoName, visited, isDone, gameMode;
+  if(tmpPlayerTwo === undefined) {
+    tmpPlayerTwo = twoName;
+    localStorage.setItem('tmpPlayerTwo',twoName);
+  }
+  else tmpPlayerTwo = localStorage.getItem('tmpPlayerTwo');
+
+  return scores,current,player,goal,oneName,twoName, visited, isDone, gameMode,tmpPlayerTwo;
 }
 
 function debug() {
@@ -326,14 +346,23 @@ function checkWinner() {
 function createDoneScreen() {
   let done = document.createElement('div');
   let winner = document.getElementById(`player${player}Name`).value
-
-  if (winner == '')
-    winner = `Spiller ${player+1}`
-
   done.setAttribute('class',`done done${player}`);
+
+  if(gameMode === 1 && player === 1) {
+    done.innerHTML = `
+    <p>Beklager, du tapte mot <strong>${winner}.</strong>
+    </br>som vant du med <strong>${scores[player]} poeng.</strong>
+    </br>mot dine <strong>${scores[0]} poeng.</strong></p>
+    <p>Revansje?</p>
+    <button onClick="resetGame(true)">Nytt spill</button>`;
+    document.body.appendChild(done);
+    console.log('Game is done');
+    return
+  }
   done.innerHTML = `
   <p>Gratulerer <strong>${winner}.</strong>
-  </br>Du vant med <strong>${scores[player]} poeng.</strong></p>
+  </br>Du trillte <strong>${throws[player]}</strong> ganger
+  </br>og vant du med <strong>${scores[player]} poeng.</strong></p>
   <button onClick="resetGame(true)">Nytt spill</button>`;
   document.body.appendChild(done);
   console.log('Game is done');
@@ -352,31 +381,32 @@ function hold(score){
 }
 
 function setDice(dice) {
-    let target = document.querySelector('.dice')
+  throws[player]++;
+  let target = document.querySelector('.dice')
 
-    switch (dice) {
-      case 1:
-      target.className = 'dice one'
-      break;
-      case 2:
-      target.className = 'dice two'
-      break;
-      case 3:
-      target.className = 'dice three'
-      break;
-      case 4:
-      target.className = 'dice four'
-      break;
-      case 5:
-      target.className = 'dice five'
-      break;
-      case 6:
-      target.className = 'dice six'
-      break;
-    }
+  switch (dice) {
+    case 1:
+    target.className = 'dice one'
+    break;
+    case 2:
+    target.className = 'dice two'
+    break;
+    case 3:
+    target.className = 'dice three'
+    break;
+    case 4:
+    target.className = 'dice four'
+    break;
+    case 5:
+    target.className = 'dice five'
+    break;
+    case 6:
+    target.className = 'dice six'
+    break;
+  }
 
-    console.log('du trillte,',dice);
-    currentScore(dice);
+  console.log('du trillte,',dice);
+  currentScore(dice);
 }
 
 function showSettings() {
@@ -438,22 +468,28 @@ function toggleGameMode() {
   gameModeCheckbox.classList.toggle('checked');
 
   if(gameModeCheckbox.classList.contains('checked')) {
+    tmpPlayerTwo = document.getElementById('player1Name').value;
+    localStorage.setItem('tmpPlayerTwo',tmpPlayerTwo);
+
     gameMode = 1;
     game.domElement.playerTwoField.classList.add('animateOut');
     setTimeout(()=>{
       game.domElement.playerTwoField.style = 'display:none;';
       game.domElement.playerTwoField.classList.remove('animateOut');
-    },500)
+      document.getElementById('player1Name').value = 'Data Daniel';
+      localStorage.setItem('twoName','Data Daniel');
+    },500);
   }
   else if(!gameModeCheckbox.classList.contains('checked')){
+    document.getElementById('player1Name').value = tmpPlayerTwo;
     gameMode = 0;
     game.domElement.playerTwoField.style = 'display:block;';
     game.domElement.playerTwoField.classList.add('animateIn');
     setTimeout(()=>{
       game.domElement.playerTwoField.classList.remove('animateIn');
+      localStorage.setItem('twoName',tmpPlayerTwo);
     },500);
   };
-
   storeLocaly();
 }
 
