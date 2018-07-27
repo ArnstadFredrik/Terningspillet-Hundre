@@ -494,8 +494,8 @@ function saveSetting() {
 function ai(){
   if (gameMode === 1 && isDone === false){
     if(player === 1){
-      if(gameDiff === 0) {
-        let temp = Math.round((Math.random() * (10 - 7+1) + 7));
+      if(gameDiff === 0) { // EASY
+        let temp = Math.round((Math.random() * (4 - 3+1) + 3));
         console.log('EASY - ai random goal',temp);
 
         while (player === 1 && current < temp ) {
@@ -504,8 +504,8 @@ function ai(){
         };
         return hold(current);
       }
-      else if (gameDiff === 1){
-        let temp = Math.round((Math.random() * (21 - 6+1) + 6));
+      else if (gameDiff === 1){ // MEDIUM
+        let temp = Math.round((Math.random() * (23 - 6+1) + 6));
         console.log('MEDIUM - ai random goal',temp);
 
         while (player === 1 && current < temp ) {
@@ -514,8 +514,8 @@ function ai(){
         };
         return hold(current);
       }
-      else if(gameDiff === 2){
-        let temp = Math.round((Math.random() * (21 - 15+1) + 15));
+      else if(gameDiff === 2){ // HARD
+        let temp = Math.round((Math.random() * (23 - 18+1) + 18));
         console.log('HARD - ai random goal',temp);
 
         while (player === 1 && current < temp) {
