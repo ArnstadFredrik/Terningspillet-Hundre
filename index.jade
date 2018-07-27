@@ -33,22 +33,30 @@ html(lang="no")
     link(rel="manifest" href="manifest.json")
     title Terningspill
   body
-    .menu.menu0
-      button(onClick="resetGame(isDone)").newGame Nytt spill
-      .dice.one
-      button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
-      button(onClick="hold(current);").hold Behold
+    //.menu.menu0
+    #dice.dice.one
+    //button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
+    //button(onClick="hold(current);").hold Behold
     
-    .settingsButton.show
+    .settingsButton
+      .menuButton
+      button(onClick="resetGame(isDone);").newGame Nytt spill
       button(onClick="showSettings()") Innstillinger
-    .settings.close
+    .settings
       input(placeholder="Spiller 1")#player0Name
       input(placeholder="Spiller 2")#player1Name
-      input(placeholder="Mål")#goal
+      .gameDiff#gameDiff
+        .easy.diff
+          p Lett
+        .medium.diff
+          p Middels
+        .hard.diff
+          p Vanskelig
       .gameMode
         .checkbox
           .i
         .lable Enspiller
+      input(placeholder="Mål")#goal  
       button(onClick="welcomeScreen()") Instruksjoner
       button(onClick="closeSettings();saveSetting();").settingsClose Lukk
       

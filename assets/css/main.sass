@@ -84,8 +84,7 @@ body
     padding: 10px
 
 .settings
-  position: relative
-  display: none
+  position: fixed
   font-size: 1.1rem
   width: 90vw
   display: grid
@@ -276,89 +275,73 @@ body
 
 
 .menu
-  position: absolute
-  height: 80vh
-  width: 20vw
-  top: 50%
-  margin-top: -40vh
-  left: 50%
-  margin-left: -10vw
-  padding: 20px
-  box-sizing: border-box
-  display: grid
-  grid-template-rows: 1fr 2fr 1fr 1fr
-  justify-items: center
-  align-items: center
-  text-align: center
-  font:
-    size: 1.5em
-    weight: 300
-  text-transform: uppercase
-  z-index: 100
-  color: $fontColor
 
-  &.menu0
-    button
-      &:hover
-        background: $mainOneDark
-        color: white
-        font-weight: 400
-        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
-    .dice
-      &.one
-        background: url('../img/player1/dice-01.svg')
-      &.two
-        background: url('../img/player1/dice-02.svg')
-      &.three
-        background: url('../img/player1/dice-03.svg')
-      &.four
-        background: url('../img/player1/dice-04.svg')
-      &.five
-        background: url('../img/player1/dice-05.svg')
-      &.six
-        background: url('../img/player1/dice-06.svg')
+  // position: absolute
+  // height: 80vh
+  // width: 20vw
+  // top: 50%
+  // margin-top: -40vh
+  // left: 50%
+  // margin-left: -10vw
+  // padding: 20px
+  // box-sizing: border-box
+  // display: grid
+  // grid-template-rows: 1fr 2fr 1fr 1fr
+  // justify-items: center
+  // align-items: center
+  // text-align: center
 
-  &.menu1
-    button
-      &:hover
-        background: $mainTwoDark
-        color: white
-        font-weight: 400
-        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2)
-    .dice
-      &.one
-        background: url('../img/player2/dice-01.svg')
-      &.two
-        background: url('../img/player2/dice-02.svg')
-      &.three
-        background: url('../img/player2/dice-03.svg')
-      &.four
-        background: url('../img/player2/dice-04.svg')
-      &.five
-        background: url('../img/player2/dice-05.svg')
-      &.six
-        background: url('../img/player2/dice-06.svg')
-
-  &:hover
-    color: white
-
-  .newGame
-    padding: 10px
-    box-sizing: border-box
-
-  .dice
+.menu0
+  &.dice
     height: 100px
     width: 100px
     background-color: white !important
     box-shadow: 0px 0px 10px 2px #bbb
+    &.one
+      background: url('../img/player1/dice-01.svg')
+    &.two
+      background: url('../img/player1/dice-02.svg')
+    &.three
+      background: url('../img/player1/dice-03.svg')
+    &.four
+      background: url('../img/player1/dice-04.svg')
+    &.five
+      background: url('../img/player1/dice-05.svg')
+    &.six
+      background: url('../img/player1/dice-06.svg')
 
-  .rollDice
-    padding: 10px
-    box-sizing: border-box
+.menu1
+  &.dice
+    height: 100px
+    width: 100px
+    background-color: white !important
+    box-shadow: 0px 0px 10px 2px #bbb
+    &.one
+      background: url('../img/player2/dice-01.svg')
+    &.two
+      background: url('../img/player2/dice-02.svg')
+    &.three
+      background: url('../img/player2/dice-03.svg')
+    &.four
+      background: url('../img/player2/dice-04.svg')
+    &.five
+      background: url('../img/player2/dice-05.svg')
+    &.six
+      background: url('../img/player2/dice-06.svg')
 
-  .hold
-    padding: 10px
-    box-sizing: border-box
+
+.newGame
+  padding: 10px
+  box-sizing: border-box
+
+
+.rollDice
+  padding: 10px
+  box-sizing: border-box
+
+.hold
+  padding: 10px
+  box-sizing: border-box
 
 .banner
   position: fixed
@@ -394,26 +377,84 @@ body
   body
     margin: 0
     grid-template-columns: 1fr
-    grid-gap: 10px
+    grid-template-rows: 1fr 1fr
+    grid-gap: 0px
     width: 100vw
-    height: auto
+    height: 100vh
 
-  .settingsButton, .settings, .menu, .grid
+  .menu, .grid
     position: relative
     width: 100vw
     margin: 0
-    top: 0
-    left: 0
+
 
   .settingsButton,.settings
-    grid-row: 3
     padding: 20px
+    width: 100vw
+
+  .settingsButton
+    position: fixed
+    bottom: -25vh
+    height: 25vh
+    .menuButton
+      $buttonSize: 50px
+      position: absolute
+      width: $buttonSize
+      height: $buttonSize
+      background: $containerColor
+      top: -$buttonSize
+      left: 50%
+      margin-left: -($buttonSize/2)
+      border-top-left-radius: 5px
+      border-top-right-radius: 5px
+      &:before
+        content: ""
+        display: block
+        position: relative
+        top: 10px
+        background: $fontColor
+        width: $buttonSize - 20
+        left: 50%
+        margin-left: -(($buttonSize - 20)/2)
+        height: 4px
+        border-radius: 5px
+        box-shadow: 0px 10px 0px 0px $fontColor
+      &:after
+        content: ""
+        display: block
+        position: relative
+        top: 27px
+        background: $fontColor
+        width: $buttonSize - 20
+        left: 50%
+        margin-left: -(($buttonSize - 20)/2)
+        height: 4px
+        border-radius: 5px
+  .openMenu
+    animation: openMenu 0.4s ease-in-out forwards
+    @keyframes openMenu
+      0%
+        bottom: -25vh
+      40%
+        bottom: 5vh
+      100%
+        bottom: 0vh
+  .closeMenu
+    animation: closeMenu 0.2s ease-in-out forwards
+    @keyframes closeMenu
+      0%
+        bottom: 0vh
+      100%
+        bottom: -25vh
+
 
   .settings
+    top: 100vh
     height: 100vh
     display: grid
     grid-template-columns: 1fr
     grid-template-rows: repeat(7, 1fr)
+    z-index: 1
 
     input
       border: none
@@ -443,9 +484,6 @@ body
     display: grid
 
   .menu
-    grid-template-columns: 1fr 1fr
-    grid-template-rows: 1fr repeat(3, 0.5fr)
-    grid-gap: 20px
     height: auto
     grid-row: 2
     font-size: 1em
@@ -459,8 +497,7 @@ body
       grid-column: span 2
 
     .dice
-      grid-row: 1
-      grid-column: span 2
+      align-self: center
 
     .rollDice
       grid-row: 2
@@ -474,6 +511,7 @@ body
     height: auto
     grid-template-columns: 1fr
     grid-row: 1
+    align-self: start
 
   .player
     display: none
@@ -608,6 +646,37 @@ body
     .addToHomeScreen
       font-weight: 600
 
+  .gameDiff
+    display: grid
+    grid-template-columns: repeat(3,1fr)
+    grid-gap: 10px
+    grid-row: 2
+    .easy,.medium,.hard
+      background: white
+      height: 100%
+      width: 100%
+      padding: 5px
+      box-sizing: border-box
+      text-align: center
+      text-transform: uppercase
+      font-size: 0.8em
+      display: grid
+      position: relative
+      p
+        justify-self: center
+        align-self: center
+      &.checked
+        width: 100%
+        height: 100%
+        background: lighten($containerColor, 8.5%)
+        &:after
+          width: 100%
+          height: 100%
+          content: ""
+          position: absolute
+          display: block
+          border-bottom: 5px solid #4d4d4d
+
   .animateDown
     animation: down 1s ease-in-out forwards
 
@@ -654,7 +723,7 @@ body
         grid-row: auto
 
       100%
-        grid-row: none
+        grid-row: auto
 
   .animateIn
     position: relative
@@ -673,3 +742,24 @@ body
       100%
         grid-row: none
         visibility: 100
+  .diffIn
+    position: relative
+    animation: diffIn 0.5s ease-in-out forwards
+
+    @keyframes diffIn
+      0%
+        right: -110vw
+        grid-row: 2
+      100%
+        right: 0vw
+        grid-row: 2
+
+  .diffOut
+    position: relative
+    animation: diffOut 0.5s ease-in-out forwards
+
+    @keyframes diffOut
+      0%
+        right: 0vw
+      100%
+        right: -110vw

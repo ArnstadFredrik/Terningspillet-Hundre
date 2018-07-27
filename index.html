@@ -29,25 +29,36 @@
     <title>Terningspill</title>
   </head>
   <body>
-    <div class="menu menu0">
-      <button onClick="resetGame(isDone)" class="newGame">Nytt spill</button>
-      <div class="dice one"></div>
-      <button onClick="setDice(rollDice());closeSettings();" id="rollDice" class="rollDice">Trill terning</button>
-      <button onClick="hold(current);" class="hold">Behold</button>
-    </div>
-    <div class="settingsButton show">
+    <!--.menu.menu0-->
+    <div id="dice" class="dice one"></div>
+    <!--button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning-->
+    <!--button(onClick="hold(current);").hold Behold-->
+    <div class="settingsButton">
+      <div class="menuButton"></div>
+      <button onClick="resetGame(isDone);" class="newGame">Nytt spill</button>
       <button onClick="showSettings()">Innstillinger</button>
     </div>
-    <div class="settings close">
+    <div class="settings">
       <input placeholder="Spiller 1" id="player0Name">
       <input placeholder="Spiller 2" id="player1Name">
-      <input placeholder="Mål" id="goal">
+      <div id="gameDiff" class="gameDiff">
+        <div class="easy diff">
+          <p>Lett</p>
+        </div>
+        <div class="medium diff">
+          <p>Middels</p>
+        </div>
+        <div class="hard diff">
+          <p>Vanskelig</p>
+        </div>
+      </div>
       <div class="gameMode">
         <div class="checkbox">
           <div class="i"></div>
         </div>
         <div class="lable">Enspiller</div>
       </div>
+      <input placeholder="Mål" id="goal">
       <button onClick="welcomeScreen()">Instruksjoner</button>
       <button onClick="closeSettings();saveSetting();" class="settingsClose">Lukk</button>
     </div>

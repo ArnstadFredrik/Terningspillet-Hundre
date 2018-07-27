@@ -68,8 +68,7 @@ body input {
 }
 
 .settings {
-  position: relative;
-  display: none;
+  position: fixed;
   font-size: 1.1rem;
   width: 90vw;
   display: grid;
@@ -286,112 +285,79 @@ body input {
   margin: 10px;
 }
 
-.menu {
-  position: absolute;
-  height: 80vh;
-  width: 20vw;
-  top: 50%;
-  margin-top: -40vh;
-  left: 50%;
-  margin-left: -10vw;
-  padding: 20px;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: 300;
-  text-transform: uppercase;
-  z-index: 100;
-  color: #4d4d4d;
-}
-
-.menu.menu0 button:hover {
-  background: #cc3700;
-  color: white;
-  font-weight: 400;
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-.menu.menu0 .dice.one {
-  background: url("../img/player1/dice-01.svg");
-}
-
-.menu.menu0 .dice.two {
-  background: url("../img/player1/dice-02.svg");
-}
-
-.menu.menu0 .dice.three {
-  background: url("../img/player1/dice-03.svg");
-}
-
-.menu.menu0 .dice.four {
-  background: url("../img/player1/dice-04.svg");
-}
-
-.menu.menu0 .dice.five {
-  background: url("../img/player1/dice-05.svg");
-}
-
-.menu.menu0 .dice.six {
-  background: url("../img/player1/dice-06.svg");
-}
-
-.menu.menu1 button:hover {
-  background: #4c7e80;
-  color: white;
-  font-weight: 400;
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-.menu.menu1 .dice.one {
-  background: url("../img/player2/dice-01.svg");
-}
-
-.menu.menu1 .dice.two {
-  background: url("../img/player2/dice-02.svg");
-}
-
-.menu.menu1 .dice.three {
-  background: url("../img/player2/dice-03.svg");
-}
-
-.menu.menu1 .dice.four {
-  background: url("../img/player2/dice-04.svg");
-}
-
-.menu.menu1 .dice.five {
-  background: url("../img/player2/dice-05.svg");
-}
-
-.menu.menu1 .dice.six {
-  background: url("../img/player2/dice-06.svg");
-}
-
-.menu:hover {
-  color: white;
-}
-
-.menu .newGame {
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.menu .dice {
+.menu0.dice {
   height: 100px;
   width: 100px;
   background-color: white !important;
   box-shadow: 0px 0px 10px 2px #bbb;
 }
 
-.menu .rollDice {
+.menu0.dice.one {
+  background: url("../img/player1/dice-01.svg");
+}
+
+.menu0.dice.two {
+  background: url("../img/player1/dice-02.svg");
+}
+
+.menu0.dice.three {
+  background: url("../img/player1/dice-03.svg");
+}
+
+.menu0.dice.four {
+  background: url("../img/player1/dice-04.svg");
+}
+
+.menu0.dice.five {
+  background: url("../img/player1/dice-05.svg");
+}
+
+.menu0.dice.six {
+  background: url("../img/player1/dice-06.svg");
+}
+
+.menu1.dice {
+  height: 100px;
+  width: 100px;
+  background-color: white !important;
+  box-shadow: 0px 0px 10px 2px #bbb;
+}
+
+.menu1.dice.one {
+  background: url("../img/player2/dice-01.svg");
+}
+
+.menu1.dice.two {
+  background: url("../img/player2/dice-02.svg");
+}
+
+.menu1.dice.three {
+  background: url("../img/player2/dice-03.svg");
+}
+
+.menu1.dice.four {
+  background: url("../img/player2/dice-04.svg");
+}
+
+.menu1.dice.five {
+  background: url("../img/player2/dice-05.svg");
+}
+
+.menu1.dice.six {
+  background: url("../img/player2/dice-06.svg");
+}
+
+.newGame {
   padding: 10px;
   box-sizing: border-box;
 }
 
-.menu .hold {
+.rollDice {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.hold {
   padding: 10px;
   box-sizing: border-box;
 }
@@ -433,26 +399,93 @@ body input {
   body {
     margin: 0;
     grid-template-columns: 1fr;
-    grid-gap: 10px;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0px;
     width: 100vw;
-    height: auto;
+    height: 100vh;
   }
-  .settingsButton, .settings, .menu, .grid {
+  .menu, .grid {
     position: relative;
     width: 100vw;
     margin: 0;
-    top: 0;
-    left: 0;
   }
   .settingsButton, .settings {
-    grid-row: 3;
     padding: 20px;
+    width: 100vw;
+  }
+  .settingsButton {
+    position: fixed;
+    bottom: -25vh;
+    height: 25vh;
+  }
+  .settingsButton .menuButton {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #f2f2f2;
+    top: -50px;
+    left: 50%;
+    margin-left: -25px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .settingsButton .menuButton:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 10px;
+    background: #4d4d4d;
+    width: 30px;
+    left: 50%;
+    margin-left: -15px;
+    height: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 0px 0px #4d4d4d;
+  }
+  .settingsButton .menuButton:after {
+    content: "";
+    display: block;
+    position: relative;
+    top: 27px;
+    background: #4d4d4d;
+    width: 30px;
+    left: 50%;
+    margin-left: -15px;
+    height: 4px;
+    border-radius: 5px;
+  }
+  .openMenu {
+    animation: openMenu 0.4s ease-in-out forwards;
+  }
+  @keyframes openMenu {
+    0% {
+      bottom: -25vh;
+    }
+    40% {
+      bottom: 5vh;
+    }
+    100% {
+      bottom: 0vh;
+    }
+  }
+  .closeMenu {
+    animation: closeMenu 0.2s ease-in-out forwards;
+  }
+  @keyframes closeMenu {
+    0% {
+      bottom: 0vh;
+    }
+    100% {
+      bottom: -25vh;
+    }
   }
   .settings {
+    top: 100vh;
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(7, 1fr);
+    z-index: 1;
   }
   .settings input {
     border: none;
@@ -483,9 +516,6 @@ body input {
     display: grid;
   }
   .menu {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr repeat(3, 0.5fr);
-    grid-gap: 20px;
     height: auto;
     grid-row: 2;
     font-size: 1em;
@@ -499,8 +529,7 @@ body input {
     grid-column: span 2;
   }
   .menu .dice {
-    grid-row: 1;
-    grid-column: span 2;
+    align-self: center;
   }
   .menu .rollDice {
     grid-row: 2;
@@ -514,6 +543,7 @@ body input {
     height: auto;
     grid-template-columns: 1fr;
     grid-row: 1;
+    align-self: start;
   }
   .player {
     display: none;
@@ -636,6 +666,41 @@ body input {
   .installBanner .addToHomeScreen {
     font-weight: 600;
   }
+  .gameDiff {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-row: 2;
+  }
+  .gameDiff .easy, .gameDiff .medium, .gameDiff .hard {
+    background: white;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    display: grid;
+    position: relative;
+  }
+  .gameDiff .easy p, .gameDiff .medium p, .gameDiff .hard p {
+    justify-self: center;
+    align-self: center;
+  }
+  .gameDiff .easy.checked, .gameDiff .medium.checked, .gameDiff .hard.checked {
+    width: 100%;
+    height: 100%;
+    background: white;
+  }
+  .gameDiff .easy.checked:after, .gameDiff .medium.checked:after, .gameDiff .hard.checked:after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    display: block;
+    border-bottom: 5px solid #4d4d4d;
+  }
   .animateDown {
     animation: down 1s ease-in-out forwards;
   }
@@ -687,7 +752,7 @@ body input {
       grid-row: auto;
     }
     100% {
-      grid-row: none;
+      grid-row: auto;
     }
   }
   .animateIn {
@@ -707,6 +772,32 @@ body input {
     100% {
       grid-row: none;
       visibility: 100;
+    }
+  }
+  .diffIn {
+    position: relative;
+    animation: diffIn 0.5s ease-in-out forwards;
+  }
+  @keyframes diffIn {
+    0% {
+      right: -110vw;
+      grid-row: 2;
+    }
+    100% {
+      right: 0vw;
+      grid-row: 2;
+    }
+  }
+  .diffOut {
+    position: relative;
+    animation: diffOut 0.5s ease-in-out forwards;
+  }
+  @keyframes diffOut {
+    0% {
+      right: 0vw;
+    }
+    100% {
+      right: -110vw;
     }
   }
 }

@@ -17,6 +17,7 @@ let player;
 let goal;
 let isDone;
 let gameMode;
+let gameDiff;
 
 let oneName;
 let twoName;
@@ -67,7 +68,8 @@ const game = {
     newGoal: document.getElementById('goal'),
     welcome: document.getElementById('welcome'),
     checkbox: document.querySelector('.checkbox'),
-    diceElement: document.querySelector('.dice')
+    diceElement: document.querySelector('.dice'),
+    diff: document.getElementById('gameDiff'),
   },
 }
 
@@ -112,6 +114,7 @@ if(localStorage.length === 0) {
   visited = true;
   isDone = false;
   gameMode = 0;
+  gameDiff = 1;
 
 
   if (game.domElement.playerOneName == '') oneName = 'Spiller 1';
@@ -132,6 +135,7 @@ else{
   };
   setValues();
   initGame();
+  storeLocaly();
 }
 
 
@@ -150,6 +154,7 @@ function storeLocaly() {
   localStorage.setItem('gameMode',gameMode);
   localStorage.setItem('tmpPlayerTwo',tmpPlayerTwo);
   localStorage.setItem('throws',throws);
+  localStorage.setItem('gameDiff',gameDiff);
 }
 function setValues() {
   tempScores = localStorage.getItem('scores');
@@ -199,7 +204,10 @@ function setValues() {
   }
   else tmpPlayerTwo = localStorage.getItem('tmpPlayerTwo');
 
-  return scores,current,player,goal,oneName,twoName, visited, isDone, gameMode,tmpPlayerTwo;
+  gameDiff = Number(localStorage.getItem('gameDiff'));
+  console.log(gameDiff);
+
+  return scores,current,player,goal,oneName,twoName, visited, isDone, gameMode,tmpPlayerTwo, gameDiff;
 }
 
 function debug() {
@@ -221,6 +229,7 @@ function resetGame(isOver) {
     removeActive();
 
     scores = [0,0];
+    throws = [0,0];
     current = 0;
     player = 0;
     isDone = false;
@@ -233,6 +242,7 @@ function resetGame(isOver) {
     if (doneScreen) doneScreen.remove();
     let approveScreen = document.getElementById('approve');
     if (approveScreen) approveScreen.remove();
+    const menu = document.querySelector('.settingsButton');
 
     storeLocaly();
 
@@ -242,7 +252,7 @@ function resetGame(isOver) {
     approveWindow.setAttribute('class','banner');
     approveWindow.innerHTML = `
     <p>Vil du starte på nytt?</p>
-    <button onClick="resetGame(true);">Ja</button>
+    <button onClick="resetGame(true);toggleMenu();">Ja</button>
     <button onClick="document.getElementById('approve').remove();">Nei</button>
     `;
     document.body.appendChild(approveWindow);
@@ -259,7 +269,7 @@ function initGame(){
   target = document.querySelector(`.score1`);
   target.innerHTML = scores[1];
 
-  game.domElement.menu.className = `menu menu${player}`;
+  game.domElement.diceElement.classList.add(`menu${player}`);
   game.domElement.player0.classList.remove('active');
   game.domElement.player0.classList.add('passive');
   game.domElement.player1.classList.remove('active');
@@ -276,7 +286,15 @@ function initGame(){
   if(gameMode === 1) {
     setTimeout(()=>{
       game.domElement.playerTwoField.style = 'display:none;';
+      game.domElement.diff.style = 'display:grid;';
+      game.domElement.diff.classList.add('diffIn');
     },500);
+  }
+  if(gameMode === 0) {
+    setTimeout(()=>{
+      game.domElement.diff.style = 'display:none;';
+      game.domElement.diff.classList.add('diffOut');
+    })
   }
 }
 
@@ -298,19 +316,23 @@ function currentScore(currentScore) {
 }
 
 function removeActive() {
+  //remove active player .active class
   activePlayer = document.querySelector(`.player${player}`)
-  activePlayer.className = `player player${player} passive`;
+  activePlayer.classList.remove(`active`);
+  activePlayer.classList.add(`passive`);
 
-  activeMenu = document.querySelector(`.menu${player}`)
-  activeMenu.className = `menu`;
+  //remove active player menu/dice
+  activeDice = document.querySelector(`.dice`)
+  activeDice.classList.remove(`menu${player}`);
 }
 
 function addActive() {
   activePlayer = document.querySelector(`.player${player}`)
-  activePlayer.className = `player player${player} active`;
+  activePlayer.classList.add(`active`);
+  activePlayer.classList.remove(`passive`);
 
-  activeMenu = document.querySelector(`.menu`)
-  activeMenu.className = `menu menu${player}`;
+  activeDice = document.querySelector(`.dice`);
+  activeDice.classList.add(`menu${player}`);
 }
 
 function changePlayer(activePlayer) {
@@ -391,22 +413,22 @@ function setDice(dice) {
 
   switch (dice) {
     case 1:
-    target.className = 'dice one'
+    target.className = `menu${player} dice one`
     break;
     case 2:
-    target.className = 'dice two'
+    target.className = `menu${player} dice two`
     break;
     case 3:
-    target.className = 'dice three'
+    target.className = `menu${player} dice three`
     break;
     case 4:
-    target.className = 'dice four'
+    target.className = `menu${player} dice four`
     break;
     case 5:
-    target.className = 'dice five'
+    target.className = `menu${player} dice five`
     break;
     case 6:
-    target.className = 'dice six'
+    target.className = `menu${player} dice six`
     break;
   }
 
@@ -416,12 +438,17 @@ function setDice(dice) {
 
 function showSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings open animateUpSettings";
+  settings.classList.add('animateUpSettings');
 }
 
 function closeSettings() {
   let settings = document.querySelector('.settings');
-  settings.className = "settings open animateDownSettings";
+  settings.classList.remove('animateUpSettings');
+  settings.classList.add('animateDownSettings');
+  toggleMenu();
+  setTimeout(()=>{
+    settings.classList.remove('animateDownSettings');
+  },500);
 }
 
 function pushDefault() {
@@ -431,6 +458,16 @@ function pushDefault() {
 
   if(gameMode === 1) {
     game.domElement.checkbox.classList.add('checked');
+  }
+
+  if(gameDiff === 0) {
+    document.querySelector('.easy').classList.add('checked');
+  }
+  else if(gameDiff === 1){
+    document.querySelector('.medium').classList.add('checked');
+  }
+  else if(gameDiff === 2){
+    document.querySelector('.hard').classList.add('checked');
   }
 
 }
@@ -456,21 +493,47 @@ function saveSetting() {
 
 function ai(){
   if (gameMode === 1 && isDone === false){
-    let temp = Math.round((Math.random() * (21 - 6+1) + 6));
-    console.log('ai random goal',temp);
+    if(player === 1){
+      if(gameDiff === 0) {
+        let temp = Math.round((Math.random() * (10 - 7+1) + 7));
+        console.log('EASY - ai random goal',temp);
 
-    while (player === 1 && current < temp ) {
-      setDice(rollDice());
-      console.log('current',current);
-    };
-    if(player === 1)
-      return hold(current);
+        while (player === 1 && current < temp ) {
+          setDice(rollDice());
+          console.log('current',current);
+        };
+        return hold(current);
+      }
+      else if (gameDiff === 1){
+        let temp = Math.round((Math.random() * (21 - 6+1) + 6));
+        console.log('MEDIUM - ai random goal',temp);
+
+        while (player === 1 && current < temp ) {
+          setDice(rollDice());
+          console.log('current',current);
+        };
+        return hold(current);
+      }
+      else if(gameDiff === 2){
+        let temp = Math.round((Math.random() * (21 - 15+1) + 15));
+        console.log('HARD - ai random goal',temp);
+
+        while (player === 1 && current < temp) {
+          setDice(rollDice());
+          console.log('current',current);
+        };
+        return hold(current);
+      }
+    }
   }
 }
 
 function toggleGameMode() {
   gameModeCheckbox = document.querySelector('.checkbox');
   gameModeCheckbox.classList.toggle('checked');
+  const renderedHeight = game.domElement.playerOneField.clientHeight;
+
+  if(gameDiff === undefined) gameDiff = 1;
 
   if(gameModeCheckbox.classList.contains('checked')) {
     tmpPlayerTwo = document.getElementById('player1Name').value;
@@ -478,7 +541,14 @@ function toggleGameMode() {
 
     gameMode = 1;
     game.domElement.playerTwoField.classList.add('animateOut');
+
+    //Difficulty
+    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px;`;
+    game.domElement.diff.classList.remove('diffOut');
+    game.domElement.diff.classList.add('diffIn');
+
     setTimeout(()=>{
+      game.domElement.diff.style = 'position:relative;';
       game.domElement.playerTwoField.style = 'display:none;';
       game.domElement.playerTwoField.classList.remove('animateOut');
       document.getElementById('player1Name').value = 'Data Daniel';
@@ -488,11 +558,18 @@ function toggleGameMode() {
   else if(!gameModeCheckbox.classList.contains('checked')){
     document.getElementById('player1Name').value = tmpPlayerTwo;
     gameMode = 0;
+
+    //Difficulty
+    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px;`;
+    game.domElement.diff.classList.remove('diffIn');
+    game.domElement.diff.classList.add('diffOut');
+
     game.domElement.playerTwoField.style = 'display:block;';
     game.domElement.playerTwoField.classList.add('animateIn');
     setTimeout(()=>{
       game.domElement.playerTwoField.classList.remove('animateIn');
       localStorage.setItem('twoName',tmpPlayerTwo);
+      game.domElement.diff.style = 'display:none;';
     },500);
   };
   storeLocaly();
@@ -500,3 +577,76 @@ function toggleGameMode() {
 
 const el = document.querySelector('.checkbox');
 el.addEventListener('click',toggleGameMode);
+
+function toggleEasy() {
+  gameDiff = 0;
+  localStorage.setItem('gameDiff',gameDiff);
+
+  let diffs = document.querySelectorAll('.diff');
+  for (let diff of diffs) diff.classList.remove('checked');
+  this.classList.add('checked');
+}
+function toggleMedium() {
+  gameDiff = 1;
+  localStorage.setItem('gameDiff',gameDiff);
+
+  let diffs = document.querySelectorAll('.diff');
+  for (let diff of diffs) diff.classList.remove('checked');
+  this.classList.add('checked');
+}
+function toggleHard() {
+  gameDiff = 2;
+  localStorage.setItem('gameDiff',gameDiff);
+
+  let diffs = document.querySelectorAll('.diff');
+  for (let diff of diffs) diff.classList.remove('checked');
+  this.classList.add('checked');
+}
+
+//EASY
+const easy = document.querySelector('.easy');
+easy.addEventListener('click',toggleEasy);
+
+//MEDIUM
+const medium = document.querySelector('.medium');
+medium.addEventListener('click',toggleMedium);
+
+//HARD
+const hard = document.querySelector('.hard');
+hard.addEventListener('click',toggleHard);
+
+// Roll and hold click funcitons
+function rollEvent() {
+  setDice(rollDice());
+}
+function holdEvent() {
+  hold(current);
+}
+  //Roll
+const diceButton = document.getElementById('dice');
+diceButton.addEventListener('click',rollEvent);
+  //Hold
+const holdButtonOne = document.querySelector('.player0');
+holdButtonOne.addEventListener('click',holdEvent);
+const holdButtonTwo = document.querySelector('.player1');
+holdButtonTwo.addEventListener('click',holdEvent);
+
+//Menu button
+function toggleMenu() {
+  const menu = document.querySelector('.settingsButton');
+
+  if(!menu.classList.contains('openMenu')){
+    menu.classList.add('openMenu');
+    return
+  };
+  if(menu.classList.contains('openMenu')){
+    menu.classList.add('closeMenu');
+    setTimeout(()=>{
+      menu.classList.remove('openMenu');
+      menu.classList.remove('closeMenu');
+      return
+    },200);
+  };
+}
+const menuButton = document.querySelector('.menuButton');
+menuButton.addEventListener('click',toggleMenu);
