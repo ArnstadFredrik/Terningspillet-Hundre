@@ -3,6 +3,7 @@ const cacheArray = [
   './',
   './assets/css/main.min.css',
   './assets/js/game.js',
+  './sw.js',
   './assets/img/player1/dice-01.svg',
   './assets/img/player1/dice-02.svg',
   './assets/img/player1/dice-03.svg',
