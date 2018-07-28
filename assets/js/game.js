@@ -340,12 +340,16 @@ function changePlayer(activePlayer) {
     case 0:
       removeActive();
       player = 1;
+      console.log(' ');
+      console.log('---------------------------------');
       console.log(`Player ${player+1} is now playing`);
       addActive();
       break;
     case 1:
       removeActive();
       player = 0;
+      console.log(' ');
+      console.log('---------------------------------');
       console.log(`Player ${player+1} is now playing`);
       addActive();
       break;
@@ -403,8 +407,12 @@ function hold(score){
     checkWinner();
     changePlayer(player);
     storeLocaly();
-
-    return ai();
+    if(gameMode === 1 && player === 1 && isDone === false) {
+      console.log('ai, data spiller');
+      return ai();
+    }
+    if(gameMode === 1 && player === 0 && isDone === false)
+      return;
 }
 
 function setDice(dice) {
@@ -492,39 +500,41 @@ function saveSetting() {
 }
 
 function ai(){
-  if (gameMode === 1 && isDone === false){
-    if(player === 1){
-      if(gameDiff === 0) { // EASY
-        let temp = Math.round((Math.random() * (4 - 3+1) + 3));
-        console.log('EASY - ai random goal',temp);
+  if(gameDiff === 0) { // EASY
+    let temp = Math.round((Math.random() * (4 - 3+1) + 3));
+    console.log('-------------------------------------');
+    console.log('EASY - ai random goal',temp);
 
-        while (player === 1 && current < temp ) {
-          setDice(rollDice());
-          console.log('current',current);
-        };
-        return hold(current);
-      }
-      else if (gameDiff === 1){ // MEDIUM
-        let temp = Math.round((Math.random() * (23 - 6+1) + 6));
-        console.log('MEDIUM - ai random goal',temp);
+    while (player === 1 && current < temp ) {
+      setDice(rollDice());
+      console.log('current',current);
+    };
+    if(player === 1)
+      return hold(current);
+  }
+  if (gameDiff === 1){ // MEDIUM
+    let temp = Math.round((Math.random() * (23 - 6+1) + 6));
+    console.log('-------------------------------------');
+    console.log('MEDIUM - ai random goal',temp);
 
-        while (player === 1 && current < temp ) {
-          setDice(rollDice());
-          console.log('current',current);
-        };
-        return hold(current);
-      }
-      else if(gameDiff === 2){ // HARD
-        let temp = Math.round((Math.random() * (23 - 18+1) + 18));
-        console.log('HARD - ai random goal',temp);
+    while (player === 1 && current < temp ) {
+      setDice(rollDice());
+      console.log('current',current);
+    };
+    if(player === 1)
+      return hold(current);
+  }
+  if(gameDiff === 2){ // HARD
+    let temp = Math.round((Math.random() * (23 - 18+1) + 18));
+    console.log('-------------------------------------');
+    console.log('HARD - ai random goal',temp);
 
-        while (player === 1 && current < temp) {
-          setDice(rollDice());
-          console.log('current',current);
-        };
-        return hold(current);
-      }
-    }
+    while (player === 1 && current < temp) {
+      setDice(rollDice());
+      console.log('current',current);
+    };
+    if(player === 1)
+      return hold(current);
   }
 }
 
