@@ -42,7 +42,9 @@ html(lang="no")
       .menuButton
       button(onClick="resetGame(isDone);").newGame Nytt spill
       button(onClick="showSettings()") Innstillinger
-      button(href="sms:123456789&body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/") Del
+      button(href="sms:+123456789&body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/") Del-&
+      button(href="sms:+123456789?body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/") Del-?
+      button(href="sms:+123456789;body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/") Del-;
     .settings
       input(placeholder="Spiller 1")#player0Name
       input(placeholder="Spiller 2")#player1Name
