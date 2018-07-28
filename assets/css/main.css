@@ -415,8 +415,8 @@ body input {
   }
   .settingsButton {
     position: fixed;
-    bottom: -65vh;
-    height: 65vh;
+    bottom: -35vh;
+    height: 35vh;
   }
   .settingsButton .menuButton {
     position: absolute;
