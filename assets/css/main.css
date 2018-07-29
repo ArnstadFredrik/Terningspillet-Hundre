@@ -419,11 +419,15 @@ body input {
     height: 35vh;
   }
   .settingsButton a {
+    display: grid;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
     text-decoration: none;
+  }
+  .settingsButton a p {
+    margin: auto;
   }
   .settingsButton .menuButton {
     position: absolute;

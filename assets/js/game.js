@@ -59,7 +59,7 @@ if(isIos() && !isInStandaloneMode()) {
   let installBanner = document.createElement('div')
   installBanner.setAttribute('class','banner installBanner closeButton');
   installBanner.innerHTML = `
-  <p>Du kan lagre dett spillet på telefonen.</br>
+  <p>Du kan lagre dette spillet på telefonen.</br>
   Trykk <span class="share"></span>, deretter <span class="addToHomeScreen">«Legg til på Hjem-skjerm»</span>
   </p>
   `;

@@ -5,7 +5,7 @@ html(lang="no")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     meta(name="theme-color" content="#cc3702")
-    meta(name="Description" content="Mobilstpillet, Terningspillet hudre. Det er om å gjøre å være først til å nå hundre, men pass på, triller du 1 mister du rundens poeng.")
+    meta(name="Description" content="Mobilstpillet, Terningspillet hundre. Det er om å gjøre å være først til å nå hundre, men pass på, triller du 1 mister du rundens poeng.")
     
     // IOS WebApp
     meta(name="apple-mobile-web-app-title" content="Terningspill")
@@ -27,10 +27,17 @@ html(lang="no")
     link(href="assets/ico/ios/splash/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image")
     link(href="assets/ico/ios/splash/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image")
     
+    link(rel="icon", type="image/png", sizes="32x32", href="assets/ico/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="assets/ico/favicon-16x16.png")
+    link(rel="manifest", href="assets/ico/site.webmanifest")
+    link(rel="mask-icon", href="assets/ico/safari-pinned-tab.svg", color="#5bbad5")
+
     link(rel="stylesheet" type="text/css" href="assets/css/main.min.css")
     link(rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon")
     link(rel="icon" href="assets/ico/favicon.ico" type="image/x-icon")
     link(rel="manifest" href="manifest.json")
+    meta(name="msapplication-TileColor", content="#ff0000")
+    meta(name="theme-color", content="#ffffff")
     title Terningspill
   body
     #dice.dice.one
@@ -39,7 +46,8 @@ html(lang="no")
       .menuButton
       button(onClick="resetGame(isDone);").newGame Nytt spill
       button(onClick="showSettings()") Innstillinger
-      a.smsLink Del
+      a.smsLink
+        p Del
     .settings
       input(placeholder="Spiller 1")#player0Name
       input(placeholder="Spiller 2")#player1Name
