@@ -220,7 +220,7 @@ function setValues() {
 
   gameMode = Number(localStorage.getItem('gameMode'));
 
-  if(tmpPlayerTwo === undefined) {
+  if(tmpPlayerTwo === undefined && twoName != "Data Daniel") {
     tmpPlayerTwo = twoName;
     localStorage.setItem('tmpPlayerTwo',twoName);
   }
@@ -503,8 +503,8 @@ function pushDefault() {
 }
 
 function saveSetting() {
-  oneName = document.getElementById(`player0Name`).value;
-  twoName = document.getElementById(`player1Name`).value;
+  oneName = document.getElementById(`player0Name`).value || 'spiller 1';
+  twoName = document.getElementById(`player1Name`).value || 'spiller 2';
   newGoal = document.getElementById('goal').value;
 
   // storing user set newGoal back to games goal variable
