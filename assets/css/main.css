@@ -21,7 +21,7 @@ body h4 {
   text-transform: uppercase;
 }
 
-body button {
+body button, body a {
   background: white;
   border: none;
   border-radius: 2px;
@@ -33,7 +33,7 @@ body button {
   transition: all 0.3s;
 }
 
-body button:hover {
+body button:hover, body a:hover {
   background: #cc3700;
   color: white;
   font-weight: 400;
@@ -417,6 +417,13 @@ body input {
     position: fixed;
     bottom: -35vh;
     height: 35vh;
+  }
+  .settingsButton a {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
   }
   .settingsButton .menuButton {
     position: absolute;

@@ -9,6 +9,7 @@ window.addEventListener('load', e => {
     }
   };
 });
+document.addEventListener('DOMContentLoaded',smsLink);
 
 let scores = [];
 let throws = [];
@@ -25,7 +26,28 @@ let tmpPlayerTwo;
 
 const isIos = () => {
   const userAgent = window.navigator.userAgent.toLowerCase();
-  return /iphone|ipad|ipod/.test(userAgent)
+  return /iphone|ipad|ipod/.test(userAgent);
+}
+const isAndroid = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /android/.test(userAgent);
+}
+
+function smsLink() {
+  let href = '';
+  let header = 'sms:'
+  let message = `Prøv terningspillet hundre,
+  http://www.arnstad.gitlab.io/terningspill/`;
+  let element = document.querySelector('.smsLink');
+
+  if(isIos()){
+    href = header + '&body=' + message;
+    element.setAttribute('href',href);
+  }
+  if(isAndroid()){
+    href = header + '?body=' + message;
+    element.setAttribute('href',href);
+  }
 }
 
 const isInStandaloneMode = () => {

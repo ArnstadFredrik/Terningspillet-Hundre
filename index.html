@@ -29,14 +29,11 @@
     <title>Terningspill</title>
   </head>
   <body>
-    <!--.menu.menu0-->
     <div id="dice" class="dice one"></div>
-    <!--button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning-->
-    <!--button(onClick="hold(current);").hold Behold-->
     <div class="settingsButton">
       <div class="menuButton"></div>
       <button onClick="resetGame(isDone);" class="newGame">Nytt spill</button>
-      <button onClick="showSettings()">Innstillinger</button><a href="sms:&amp;body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/">Del</a>
+      <button onClick="showSettings()">Innstillinger</button><a class="smsLink">Del</a>
     </div>
     <div class="settings">
       <input placeholder="Spiller 1" id="player0Name">

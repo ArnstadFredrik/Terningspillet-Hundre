@@ -33,16 +33,13 @@ html(lang="no")
     link(rel="manifest" href="manifest.json")
     title Terningspill
   body
-    //.menu.menu0
     #dice.dice.one
-    //button(onClick="setDice(rollDice());closeSettings();").rollDice#rollDice Trill terning
-    //button(onClick="hold(current);").hold Behold
     
     .settingsButton
       .menuButton
       button(onClick="resetGame(isDone);").newGame Nytt spill
       button(onClick="showSettings()") Innstillinger
-      a(href="sms:&body=Prøv-terningspillet-hundre.-arnstad.gitlab.io/terningspill/") Del
+      a.smsLink Del
     .settings
       input(placeholder="Spiller 1")#player0Name
       input(placeholder="Spiller 2")#player1Name
