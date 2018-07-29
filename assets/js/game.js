@@ -37,7 +37,7 @@ function smsLink() {
   let href = '';
   let header = 'sms:'
   let message = `Prøv terningspillet hundre,
-  http://www.arnstad.gitlab.io/terningspill/`;
+  http://arnstad.gitlab.io/terningspill/`;
   let element = document.querySelector('.smsLink');
 
   if(isIos()){
