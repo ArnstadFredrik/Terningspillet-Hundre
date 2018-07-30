@@ -1,0 +1,306 @@
+
+.menu, .grid
+  position: relative
+  width: 100vw
+  margin: 0
+
+
+.settingsButton,.settings
+  padding: 20px
+  width: 100vw
+
+.settingsButton
+  position: fixed
+  bottom: -35vh
+  height: 35vh
+
+  a
+    display: grid
+    width: 100%
+    padding: 10px
+    box-sizing: border-box
+    text-align: center
+    text-decoration: none
+    p
+      margin: auto
+
+  .menuButton
+    $buttonSize: 50px
+    position: absolute
+    width: $buttonSize
+    height: $buttonSize
+    background: $containerColor
+    top: -$buttonSize
+    left: 50%
+    margin-left: -($buttonSize/2)
+    border-top-left-radius: 5px
+    border-top-right-radius: 5px
+    &:before
+      content: ""
+      display: block
+      position: relative
+      top: 10px
+      background: $fontColor
+      width: $buttonSize - 20
+      left: 50%
+      margin-left: -(($buttonSize - 20)/2)
+      height: 4px
+      border-radius: 5px
+      box-shadow: 0px 10px 0px 0px $fontColor
+    &:after
+      content: ""
+      display: block
+      position: relative
+      top: 27px
+      background: $fontColor
+      width: $buttonSize - 20
+      left: 50%
+      margin-left: -(($buttonSize - 20)/2)
+      height: 4px
+      border-radius: 5px
+.openMenu
+  animation: openMenu 0.4s ease-in-out forwards
+  @keyframes openMenu
+    0%
+      bottom: -25vh
+    40%
+      bottom: 5vh
+    100%
+      bottom: 0vh
+.closeMenu
+  animation: closeMenu 0.2s ease-in-out forwards
+  @keyframes closeMenu
+    0%
+      bottom: 0vh
+    100%
+      bottom: -25vh
+
+
+.settings
+  top: 100vh
+  height: 100vh
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: repeat(7, 1fr)
+  z-index: 1
+
+  input
+    border: none
+    -webkit-border: none
+    border-radius: 0px
+    -webkit-border-radius: 0px
+
+  button
+    padding: 10px
+    height: 100%
+
+  .settingsClose
+    padding: 20px
+
+.open
+  display: grid
+  position: fixed
+  bottom: 0
+  z-index: 100
+
+.close
+  top: auto
+  bottom: -100vh
+  position: fixed
+  z-index: 200
+.show
+  display: grid
+
+.menu
+  height: auto
+  grid-row: 2
+  font-size: 1em
+
+  button
+    height: 100%
+    width: 100%
+
+  .newGame
+    grid-row: 4
+    grid-column: span 2
+
+  .dice
+    align-self: center
+
+  .rollDice
+    grid-row: 2
+    grid-column: 1
+
+  .hold
+    grid-row: 2
+    grid-column: 2
+
+.grid
+  height: auto
+  grid-template-columns: 1fr
+  grid-row: 1
+  align-self: start
+
+.player
+  display: none
+  grid-template-rows: repeat(3, 0.25fr)
+  font-size: 0.7em
+  padding: 20px
+  transition: all 0.5s
+
+  .current
+    width: 50vw
+    height: 10vh
+    padding: 8px
+    box-sizing: border-box
+
+  &.passive
+    display: grid
+    grid-template-rows: 0.25fr
+    grid-row: 1
+    padding: 10px
+    .name
+      display: none
+    .score
+      display: grid
+      font-size: 2.5em
+    .current
+      display: none
+
+  &.active
+    display: grid
+
+  &.active, &.passive
+    &:before
+      width: 20px
+      height: 20px
+      top: 22px
+      margin-left: -7.5px
+      padding: 3px
+      padding-left: 6.5px
+      color: white
+      font:
+        size: 1.3em
+        weight: 600
+      text-align: center
+      box-sizing: border-box
+
+  &.passive
+    &:before
+      width: 15px
+      height: 15px
+      padding:
+        left: 5px
+        top: 2px
+      font-size: 1em
+      top: 15px
+
+
+.player0
+  &.active, &.passive
+    &:before
+      content: "1"
+      left: 5vw
+
+
+.player1
+  &.active, &.passive
+    &:before
+      content: "2"
+      right: 5vw
+
+.done
+  height: 100vh
+  width: 100vw
+  position: fixed
+  left: 0
+  margin-left: 0
+  top: 0
+  bottom: 0
+  font-size: 1em
+  padding: 20px
+  box-sizing: border-box
+
+  button
+    width: 100%
+    height: 50px
+    box-sizing: border-box
+    margin-top: 20px
+
+.installBanner
+  bottom: 8vw
+  top: auto
+  font-size: 0.7rem
+  padding:
+    top: 10px
+    bottom: 10px
+
+  &:after
+    content: ""
+    width: 20px
+    height: 20px
+    background: $containerColor
+    box-shadow: 4px 4px 10px -2px #bbb
+    position: absolute
+    bottom: -(20px/2)
+    left: 50%
+    margin-left: -(20px/2)
+    transform: rotate(45deg)
+
+  .closeButton
+    text-transform: uppercase
+    width: 100%
+    background:
+    position: absolute
+    top: 0
+    left: 0
+    padding: 7px
+    box-sizing: border-box
+
+  .share
+    display: inline-block
+    height: 25px
+    width: 25px
+    margin-left: 10px
+    position: relative
+    top: 6px
+
+    background:
+      image: url("../ico/share.png")
+      size: contain
+      repeat: no-repeat
+
+
+  .addToHomeScreen
+    font-weight: 600
+
+.gameDiff
+  display: grid
+  grid-template-columns: repeat(3,1fr)
+  grid-gap: 10px
+  grid-row: 2
+  .easy,.medium,.hard
+    background: white
+    height: 100%
+    width: 100%
+    padding: 5px
+    box-sizing: border-box
+    text-align: center
+    text-transform: uppercase
+    font-size: 0.8em
+    display: grid
+    position: relative
+    p
+      justify-self: center
+      align-self: center
+    &.checked
+      width: 100%
+      height: 100%
+      background: lighten($containerColor, 8.5%)
+      &:after
+        width: 100%
+        height: 100%
+        content: ""
+        position: absolute
+        display: block
+        border-bottom: 5px solid #4d4d4d

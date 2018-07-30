@@ -1,3 +1,4 @@
+
 //terningspill
 window.addEventListener('load', e => {
   if('serviceWorker' in window.navigator) {
@@ -48,6 +49,10 @@ function smsLink() {
     href = header + '?body=' + message;
     element.setAttribute('href',href);
   }
+  if(!isIos() && !isAndroid()) {
+    href = "mailto:?body=" + message;
+    element.setAttribute('href',href);
+  }
 }
 
 const isInStandaloneMode = () => {
@@ -91,43 +96,92 @@ const game = {
     welcome: document.getElementById('welcome'),
     checkbox: document.querySelector('.checkbox'),
     diceElement: document.querySelector('.dice'),
+    currentElement: document.querySelector('.current'),
+    scoreElement: document.querySelector('.score'),
+    activeElement: document.querySelector('.active'),
+    gridElement: document.querySelector('.grid'),
+    menu: document.querySelector('.settingsButton'),
+    settings: document.querySelector('.settings'),
     diff: document.getElementById('gameDiff'),
   },
 }
 
-function welcomeScreen(){
+function welcomeScreen(state){
   let welcome = document.createElement('div');
   welcome.setAttribute('id','welcome');
-  welcome.setAttribute('class','banner');
-  paragraph = document.createElement('p');
-  welcome.innerHTML = `<h3>Terningsspillet</h3>
-    <p>Det er om å gjøre å bli førstemann til <strong>100 poeng</strong></p>
-    <p>Du kan trille så mange ganger du vil pr runde, men poengene må <span>«beholdes»</span></p>
-    <p>Triller du <strong>1</strong> så mister du denne rundens poeng.</p>
-    <p>Navn på spillere og poenggrense kan endres i innstillengene nederst på siden.</p>`;
-
-  h = document.createElement('h2');
-  pOne = document.createElement('p');
-  pTwo = document.createElement('p');
-
-  hContent = document.createTextNode('');
-  pOneContent = document.createTextNode('');
-  pTwoContetn = document.createTextNode('');
-
   let closeBtn = document.createElement('button');
   closeBtn.innerHTML = 'Lukk';
   closeBtn.setAttribute('onClick','removeWelcomeScreen()');
 
   welcome.appendChild(closeBtn);
-
   document.body.appendChild(welcome);
+
+  switch (state){
+    case 1:
+      let tut = Math.round(Math.random() * (6 - 2) + 2);
+      welcome.innerHTML = `<div class="tutorial" style="align-self:start;">
+      <h4><i>1</i>Trill terning</h4>
+      <p>Her er det om å bli først til 100 poeng.</p>
+      <p>Du triller så mange ganger du vil,
+      </br>men triller du 1 mister du denne rundens poeng</p>
+      <button onClick="removeWelcomeScreen();resetGame(true);">Hopp Over</button>
+      </div>`;
+      game.domElement.diceElement.style = "z-index: 1";
+
+      document.querySelector('.dice').addEventListener('click',()=>{
+        removeWelcomeScreen();
+        welcomeScreen(2);
+        game.domElement.diceElement.style = "z-index: 0";
+      })
+      break;
+
+    case 2:
+      changePlayer(1);
+      welcome.innerHTML = `<div class="tutorial" style="align-self:end;">
+      <h4><i>2</i>Rundepoeng</h4>
+      <p>Så lenge du triller terning samler du opp rundepoeng.</p>
+      <p>Men du må trykke på feltet over for å lagre poengene.
+      </br>For om du triller 1, mister du alle rundepoengene</p>
+      <button onClick="removeWelcomeScreen();resetGame(true);">Hopp Over</button>
+      </div>`;
+      game.domElement.gridElement.style = "z-index: 1";
+
+      document.querySelector('.grid').addEventListener('click',()=>{
+        removeWelcomeScreen();
+        welcomeScreen(3);
+        game.domElement.gridElement.style = "z-index: 0";
+      })
+      break;
+
+    case 3:
+      welcome.innerHTML = `<div class="tutorial" style="height:60vh">
+      <h4><i>3</i>Meny</h4>
+      <p>Om det ikke går så bra og du vil starte på nytt kan du gjøre det her.</p>
+      <p>Her er det også innstillinger om du vil spille alene eller med en venn.
+      </br>Du kan endre navnet til de som spiller og om du vil spille lengre enn til 100, kan du gjøre det her.</p>
+      <button onClick="removeWelcomeScreen();resetGame(true);">Ferdig</button>
+      </div>`;
+      document.querySelector('.menuButton').style = "z-index: 1";
+      document.querySelector('.openSettingsButton').style = "z-index: 1";
+      game.domElement.settings.style = "z-index: 2";
+
+      document.querySelector('.settingsClose').addEventListener('click',()=>{
+        removeWelcomeScreen();
+        resetGame(true);
+      })
+
+      break;
+
+  }
+
+
 }
 function removeWelcomeScreen() {
   document.getElementById('welcome').remove();
 }
 
 if(localStorage.length === 0) {
-  welcomeScreen();
+  welcomeScreen(1);
   scores = [0,0];
   throws = [0,0];
   current = 0;
@@ -564,10 +618,12 @@ function toggleGameMode() {
   gameModeCheckbox = document.querySelector('.checkbox');
   gameModeCheckbox.classList.toggle('checked');
   const renderedHeight = game.domElement.playerOneField.clientHeight;
+  const renderedWidth = game.domElement.playerOneField.clientWidth;
 
   if(gameDiff === undefined) gameDiff = 1;
 
   if(gameModeCheckbox.classList.contains('checked')) {
+    gameModeCheckbox.nextElementSibling.innerHTML = "enspiller";
     tmpPlayerTwo = document.getElementById('player1Name').value;
     localStorage.setItem('tmpPlayerTwo',tmpPlayerTwo);
 
@@ -575,7 +631,7 @@ function toggleGameMode() {
     game.domElement.playerTwoField.classList.add('animateOut');
 
     //Difficulty
-    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px;`;
+    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px; width: ${renderedWidth}px; top:0px`;
     game.domElement.diff.classList.remove('diffOut');
     game.domElement.diff.classList.add('diffIn');
 
@@ -588,11 +644,12 @@ function toggleGameMode() {
     },500);
   }
   else if(!gameModeCheckbox.classList.contains('checked')){
+    gameModeCheckbox.nextElementSibling.innerHTML = "flerspiller";
     document.getElementById('player1Name').value = tmpPlayerTwo;
     gameMode = 0;
 
     //Difficulty
-    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px;`;
+    game.domElement.diff.style = `display:grid; position:absolute; height:${renderedHeight}px; width: ${renderedWidth}px; top:0px`;
     game.domElement.diff.classList.remove('diffIn');
     game.domElement.diff.classList.add('diffOut');
 

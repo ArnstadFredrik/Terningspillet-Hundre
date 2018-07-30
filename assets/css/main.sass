@@ -1,23 +1,9 @@
-$res-small: 'max-width: 420px'
-$res-medium: 'max-width: 680px'
-$res-large: 'max-width: 900px'
+@import '_sass/vars'
+@import '_sass/keyframes'
+@import '_sass/media'
 
-$font: 'Helvetica', sans-serif
-
-$mainOne: orangered
-$backgroundColor: darken(white, 3%)
-$mainOneDark: darken($mainOne, 10%)
-$mainOneLight: lighten($mainOne, 35%)
-$containerColor: darken(white, 5%)
-$activeOne: fade-out($mainOne, .85)
-
-$fontColor: darken(white, 70%)
-
-$mainTwo: cadetblue
-$activeTwo: fade-out($mainTwo, .85)
-$mainTwoDark: darken($mainTwo, 10%)
-$mainTwoLight: lighten($mainTwo, 35%)
-
+html
+  background-color: white
 body
   h1,
   h2,
@@ -26,14 +12,16 @@ body
     text-transform: uppercase
 
   display: grid
-  grid-template-rows: auto
-  grid-gap: 20px
+  grid-template-rows: 1fr 1fr
+  grid-template-columns: 1fr
+  grid-gap: 0px
   justify-items: center
   align-items: center
   position: relative
-  margin: 0
-  height: auto
-  width: 100vw
+  margin: auto
+  height: 100vh
+  overflow: hidden
+
   font:
     family: $font
     size: 14px
@@ -67,236 +55,107 @@ body
     font:
       family: $font
       size: 0.8em
-    padding: 5px
-
-.settingsButton
-  position: relative
-  font-size: 1.5em
-  width: 90vw
-  display: grid
-  grid-gap: 10px
-  grid-row: 1
-  background: $containerColor
-  padding: 20px
-  box-sizing: border-box
-
-  button
-    padding: 10px
-
-.settings
-  position: fixed
-  font-size: 1.1rem
-  width: 90vw
-  display: grid
-  grid-row: 1
-  grid-template-columns: repeat(5, 1fr)
-  grid-gap: 10px
-  background: $containerColor
-  padding: 10px
-  box-sizing: border-box
-
-  input
-    font-size: 0.8em
-
-.gameMode
-  $checkboxSize: 40px
-  text-transform: uppercase
-  font-size: 0.8em
-
-  .checkbox,.checked
-    display: inline-block
-    height: $checkboxSize
-    width: $checkboxSize
-
-  .checkbox
-    padding: 5px
-    background-color: white
-    border-radius: 0px
-
-  .checked
-    position: relative
-    width: $checkboxSize
-    height: $checkboxSize
-
-    &:before,&:after
-      content: ""
-      position: relative
-      width: $checkboxSize
-      height: $checkboxSize
-      display: block
-
-    &:before
-      top: 0
-      left: 0
-      background: $containerColor
-
-    .i
-      position: absolute
-      transform: rotate(-45deg)
-      transform-origin: top
-      bottom: 22px
-      left: 16px
-      background: $fontColor
-      height: 6px
-      width: $checkboxSize - 20
-      margin: 0
-      padding: 0
-
-      &:before
-        content: ""
-        display: block
-        position: absolute
-        bottom: 6px
-        left: -2px
-        width: 10px
-        height: 6px
-        transform: rotate(90deg)
-        background: $fontColor
-
-  .lable
-    display: inline-block
-    position: relative
-    top: -($checkboxSize/2)
-    margin-left: 20px
-
-//.close
-  display: none
-
-//.open
-  display: grid
-
-.done0
-  background-color: $mainOneDark
-.done1
-  background-color: $mainTwoDark
-
-.done
-  position: absolute
-  width: 70vw
-  height: 25vh
-  z-index: 200
-  color: white
-  font-size: 2em
-  vertical-align: center
-  text-align: center
-  text-transform: uppercase
-  letter-spacing: 4px
-  top: 60%
-  left: 50%
-  margin-left: -35vw
-  display: grid
-  justify-items: center
-  align-items: center
-
 
 .grid
+  width: 100%
+  height: auto
+  grid-row: 1
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: 10vh 1fr
+  align-self: start
+  height: auto
   padding: 20px
   box-sizing: border-box
-  display: grid
-  grid-template-columns: repeat(2,1fr)
-  width: 90vw
-  height: 80vh
-  background: $containerColor
-  text-align: center
-  text-transform: uppercase
-  letter-spacing: 4px
-  grid-row: 2
 
-.player
-  display: grid
-  grid-template-rows: 1fr 2fr 1fr
-  align-items: center
-  position: relative
-  transition: all 0.4s
-
-  &.active, &.passive
+  .player0
+    background: $activeOne
+    color: $mainOneDark
     &:before
-      position: absolute
-      border-radius: 2px
-      top: 7vh
-      padding: 10px
-      padding-left: 12px
-      box-sizing: border-box
+      content: "1"
+      padding: 3px
+      background: $mainOneDark
       color: white
+      position: absolute
+      border-radius: 1px
+      left: 20px
+      top: 20px
+      text-align: center
 
-  &.player0
-    .name
-      color: $mainOneDark
-    .score
-      color: $mainOneDark
     .current
       background: $mainOneDark
-    &.active, &.passive
-      background: $activeOne
-      &:before
-        background: $mainOneDark
-        content: "1"
-        left: 5vw
+      color: white
 
+  .player1
+    background: $activeTwo
+    color: $mainTwoDark
+    &:before
+      content: "2"
+      padding: 3px
+      padding-left: 5px
+      background: $mainTwoDark
+      color: white
+      position: absolute
+      border-radius: 1px
+      right: 20px
+      top: 20px
+      text-align: center
 
-  &.player1
-    .name
-      color: $mainTwoDark
-    .score
-      color: $mainTwoDark
     .current
       background: $mainTwoDark
-    &.active, &.passive
-      background: $activeTwo
-      &:before
-        background: $mainTwoDark
-        content: "2"
-        right: 5vw
+      color: white
 
-  .name
-    font:
-      size: 2.5em
-      weight: 300
-
-  .score
-    font:
-      size: 6em
-      weight: 400
-
-  .current
-    width: 140px
-    height: 90px
+  .player
+    display: grid
+    position: relative
+    grid-template-rows: repeat(3, 0.25fr)
+    font-size: 0.7em
     padding: 20px
-    justify-self: center
-    box-sizing: border-box
-    border-radius: 2px
-    color: white
-    & span
-      font-size: 0.8em
+    transition: all 0.3s
+    justify-items: center
+    align-items: center
+    text-transform: uppercase
+    letter-spacing: 2px
+    font-weight: 100
 
-  p.currentScore
-    font-size: 2em
-    margin: 10px
+    .name
+      font-size: 2.5em
+    .score
+      font:
+        size: 6em
+        weight: 400
 
+    .current
+      display: grid
+      align-items: center
+      justify-items: center
+      width: 100%
+      height: 10vh
+      padding: 10px
+      box-sizing: border-box
+      font-weight: 400
+      span
+        font-size: 0.8em
+      p
+        font-size: 2em
+        margin: 0
 
-.menu
+  .active
+    grid-row: 2
+  .passive
+    grid-row: 1
+    .name,.current
+      display: none
+    .score
+      font-size: 2em
 
-  // position: absolute
-  // height: 80vh
-  // width: 20vw
-  // top: 50%
-  // margin-top: -40vh
-  // left: 50%
-  // margin-left: -10vw
-  // padding: 20px
-  // box-sizing: border-box
-  // display: grid
-  // grid-template-rows: 1fr 2fr 1fr 1fr
-  // justify-items: center
-  // align-items: center
-  // text-align: center
+.dice
+  background-color: white !important
+  box-shadow: 0px 0px 10px 0px #bbb
+  width: 100px
+  height: 100px
 
-.menu0
-  &.dice
-    height: 100px
-    width: 100px
-    background-color: white !important
-    box-shadow: 0px 0px 10px 2px #bbb
+  &.menu0
     &.one
       background: url('../img/player1/dice-01.svg')
     &.two
@@ -310,12 +169,7 @@ body
     &.six
       background: url('../img/player1/dice-06.svg')
 
-.menu1
-  &.dice
-    height: 100px
-    width: 100px
-    background-color: white !important
-    box-shadow: 0px 0px 10px 2px #bbb
+  &.menu1
     &.one
       background: url('../img/player2/dice-01.svg')
     &.two
@@ -329,20 +183,208 @@ body
     &.six
       background: url('../img/player2/dice-06.svg')
 
-
-.newGame
-  padding: 10px
+.settings,.settingsButton
+  position: absolute
+  width: 100%
+  display: grid
+  grid-gap: 10px
+  justify-items: center
+  align-items: center
+  background: $containerColor
+  padding: 20px
   box-sizing: border-box
 
+.settingsButton
+  $settingsButton: 35vh
+  height: $settingsButton
+  bottom: -$settingsButton
+  grid-gap: 10px
 
-.rollDice
-  padding: 10px
+  .menuButton
+    $buttonSize: 50px
+    position: absolute
+    width: $buttonSize
+    height: $buttonSize
+    background: $containerColor
+    top: -$buttonSize
+    left: 50%
+    margin-left: -($buttonSize/2)
+    border-top-left-radius: 5px
+    border-top-right-radius: 5px
+
+    &:before
+      content: ""
+      display: block
+      position: relative
+      top: 10px
+      background: $fontColor
+      width: $buttonSize - 20
+      left: 50%
+      margin-left: -(($buttonSize - 20)/2)
+      height: 4px
+      border-radius: 5px
+      box-shadow: 0px 10px 0px 0px $fontColor
+    &:after
+      content: ""
+      display: block
+      position: relative
+      top: 27px
+      background: $fontColor
+      width: $buttonSize - 20
+      left: 50%
+      margin-left: -(($buttonSize - 20)/2)
+      height: 4px
+      border-radius: 5px
+
+  a
+    display: grid
+    align-items: center
+    justify-items: center
+    text-decoration: none
+
+    p
+      margin: 0
+
+button, a, input, .gameMode
+  width: 100%
+  height: 100%
   box-sizing: border-box
-
-.hold
   padding: 10px
-  box-sizing: border-box
+  border: none
 
+.settings
+  height: 100vh
+  bottom: -100vh
+  z-index: 1
+  grid-template-rows: repeat(2, 80px) 60px 80px repeat(2, 60px)
+
+  .gameMode
+    $checkboxSize: 40px
+    padding: 0
+    display: grid
+    grid-template-columns: 50px 1fr
+    align-items: center
+    .checkbox,.checked
+      display: inline-block
+      height: $checkboxSize
+      width: $checkboxSize
+
+    .checkbox
+      padding: 5px
+      background-color: white
+      border-radius: 0px
+
+    .checked
+      position: relative
+      width: $checkboxSize
+      height: $checkboxSize
+
+      &:before,&:after
+        content: ""
+        position: relative
+        width: $checkboxSize
+        height: $checkboxSize
+        display: block
+
+      &:before
+        top: 0
+        left: 0
+        background: $containerColor
+
+      .i
+        position: absolute
+        transform: rotate(-45deg)
+        transform-origin: top
+        bottom: 22px
+        left: 16px
+        background: $fontColor
+        height: 6px
+        width: $checkboxSize - 20
+        margin: 0
+        padding: 0
+
+        &:before
+          content: ""
+          display: block
+          position: absolute
+          bottom: 6px
+          left: -2px
+          width: 10px
+          height: 6px
+          transform: rotate(90deg)
+          background: $fontColor
+
+    .lable
+      padding: 20px
+      text-transform: uppercase
+
+.gameDiff
+  display: grid
+  grid-template-columns: repeat(3,1fr)
+  grid-gap: 10px
+  grid-row: 2
+  width: 100%
+  height: 100%
+
+  .easy,.medium,.hard
+    background: white
+    height: 100%
+    width: 100%
+    padding: 5px
+    box-sizing: border-box
+    text-align: center
+    text-transform: uppercase
+    font-size: 0.8em
+    display: grid
+    position: relative
+    p
+      justify-self: center
+      align-self: center
+    &.checked
+      width: 100%
+      height: 100%
+      background: lighten($containerColor, 8.5%)
+      &:after
+        width: 100%
+        height: 100%
+        content: ""
+        position: absolute
+        display: block
+        border-bottom: 5px solid #4d4d4d
+
+.banner
+  position: fixed
+  top: 5vh
+  left: 5vw
+
+#welcome
+  position: absolute
+  width: 100%
+  height: 100%
+  background-color: rgba(255,255,255,0.6)
+  display: grid
+
+  .tutorial
+    background: white
+    height: 45vh
+    padding: 20px
+    position: relative
+    font-size: 1.2em
+    box-shadow: 0px 0px 10px 0px #bbb
+    z-index: 1
+    display: grid
+    align-items: center
+
+
+    i
+      padding: 10px 15px
+      background: $containerColor
+      font-size: 1.1em
+      margin-right: 20px
+
+  button
+    height: auto
+    width: auto
 .banner
   position: fixed
   top: 5vw
@@ -358,419 +400,75 @@ body
   box-sizing: border-box
   z-index: 100
 
-#welcome,#approve,
+.installBanner
+  bottom: 8vw
+  top: auto
+  font-size: 0.7rem
+  padding:
+    top: 10px
+    bottom: 10px
+
+  &:after
+    content: ""
+    width: 20px
+    height: 20px
+    background: $containerColor
+    box-shadow: 4px 4px 10px -2px #bbb
+    position: absolute
+    bottom: -(20px/2)
+    left: 50%
+    margin-left: -(20px/2)
+    transform: rotate(45deg)
+
+  .closeButton
+    text-transform: uppercase
+    width: 100%
+    background:
+    position: absolute
+    top: 0
+    left: 0
+    padding: 7px
+    box-sizing: border-box
+
+  .share
+    display: inline-block
+    height: 25px
+    width: 25px
+    margin-left: 10px
+    position: relative
+    top: 6px
+
+    background:
+      image: url("../ico/share.png")
+      size: contain
+      repeat: no-repeat
+
+  .addToHomeScreen
+    font-weight: 600
+.done0
+  background-color: $mainOneDark
+.done1
+  background-color: $mainTwoDark
+
+.done
+  position: absolute
+  width: 100%
+  height: 100%
+  z-index: 1
+  color: white
+  font-size: 1.2em
+  vertical-align: center
+  text-align: center
+  text-transform: uppercase
+  padding: 20px
+  box-sizing: border-box
+  letter-spacing: 4px
+  display: grid
+  justify-items: center
+  align-items: center
 
   button
     width: 100%
     height: 50px
     box-sizing: border-box
     margin-top: 20px
-
-  h3,
-  strong
-    color: $mainOneDark
-
-  span
-    font-style: italic
-
-@media ($res-small)
-  body
-    margin: 0
-    grid-template-columns: 1fr
-    grid-template-rows: 1fr 1fr
-    grid-gap: 0px
-    width: 100vw
-    height: 100vh
-
-  .menu, .grid
-    position: relative
-    width: 100vw
-    margin: 0
-
-
-  .settingsButton,.settings
-    padding: 20px
-    width: 100vw
-
-  .settingsButton
-    position: fixed
-    bottom: -35vh
-    height: 35vh
-
-    a
-      display: grid
-      width: 100%
-      padding: 10px
-      box-sizing: border-box
-      text-align: center
-      text-decoration: none
-      p
-        margin: auto
-
-    .menuButton
-      $buttonSize: 50px
-      position: absolute
-      width: $buttonSize
-      height: $buttonSize
-      background: $containerColor
-      top: -$buttonSize
-      left: 50%
-      margin-left: -($buttonSize/2)
-      border-top-left-radius: 5px
-      border-top-right-radius: 5px
-      &:before
-        content: ""
-        display: block
-        position: relative
-        top: 10px
-        background: $fontColor
-        width: $buttonSize - 20
-        left: 50%
-        margin-left: -(($buttonSize - 20)/2)
-        height: 4px
-        border-radius: 5px
-        box-shadow: 0px 10px 0px 0px $fontColor
-      &:after
-        content: ""
-        display: block
-        position: relative
-        top: 27px
-        background: $fontColor
-        width: $buttonSize - 20
-        left: 50%
-        margin-left: -(($buttonSize - 20)/2)
-        height: 4px
-        border-radius: 5px
-  .openMenu
-    animation: openMenu 0.4s ease-in-out forwards
-    @keyframes openMenu
-      0%
-        bottom: -25vh
-      40%
-        bottom: 5vh
-      100%
-        bottom: 0vh
-  .closeMenu
-    animation: closeMenu 0.2s ease-in-out forwards
-    @keyframes closeMenu
-      0%
-        bottom: 0vh
-      100%
-        bottom: -25vh
-
-
-  .settings
-    top: 100vh
-    height: 100vh
-    display: grid
-    grid-template-columns: 1fr
-    grid-template-rows: repeat(7, 1fr)
-    z-index: 1
-
-    input
-      border: none
-      -webkit-border: none
-      border-radius: 0px
-      -webkit-border-radius: 0px
-
-    button
-      padding: 10px
-      height: 100%
-
-    .settingsClose
-      padding: 20px
-
-  .open
-    display: grid
-    position: fixed
-    bottom: 0
-    z-index: 100
-
-  .close
-    top: auto
-    bottom: -100vh
-    position: fixed
-    z-index: 200
-  .show
-    display: grid
-
-  .menu
-    height: auto
-    grid-row: 2
-    font-size: 1em
-
-    button
-      height: 100%
-      width: 100%
-
-    .newGame
-      grid-row: 4
-      grid-column: span 2
-
-    .dice
-      align-self: center
-
-    .rollDice
-      grid-row: 2
-      grid-column: 1
-
-    .hold
-      grid-row: 2
-      grid-column: 2
-
-  .grid
-    height: auto
-    grid-template-columns: 1fr
-    grid-row: 1
-    align-self: start
-
-  .player
-    display: none
-    grid-template-rows: repeat(3, 0.25fr)
-    font-size: 0.7em
-    padding: 20px
-    transition: all 0.5s
-
-    .current
-      width: 50vw
-      height: 10vh
-      padding: 8px
-      box-sizing: border-box
-
-    &.passive
-      display: grid
-      grid-template-rows: 0.25fr
-      grid-row: 1
-      padding: 10px
-      .name
-        display: none
-      .score
-        display: grid
-        font-size: 2.5em
-      .current
-        display: none
-
-    &.active
-      display: grid
-
-    &.active, &.passive
-      &:before
-        width: 20px
-        height: 20px
-        top: 22px
-        margin-left: -7.5px
-        padding: 3px
-        padding-left: 6.5px
-        color: white
-        font:
-          size: 1.3em
-          weight: 600
-        text-align: center
-        box-sizing: border-box
-
-    &.passive
-      &:before
-        width: 15px
-        height: 15px
-        padding:
-          left: 5px
-          top: 2px
-        font-size: 1em
-        top: 15px
-
-
-  .player0
-    &.active, &.passive
-      &:before
-        content: "1"
-        left: 5vw
-
-
-  .player1
-    &.active, &.passive
-      &:before
-        content: "2"
-        right: 5vw
-
-  .done
-    height: 100vh
-    width: 100vw
-    position: fixed
-    left: 0
-    margin-left: 0
-    top: 0
-    bottom: 0
-    font-size: 1em
-    padding: 20px
-    box-sizing: border-box
-
-    button
-      width: 100%
-      height: 50px
-      box-sizing: border-box
-      margin-top: 20px
-
-  .installBanner
-    bottom: 8vw
-    top: auto
-    font-size: 0.7rem
-    padding:
-      top: 10px
-      bottom: 10px
-
-    &:after
-      content: ""
-      width: 20px
-      height: 20px
-      background: $containerColor
-      box-shadow: 4px 4px 10px -2px #bbb
-      position: absolute
-      bottom: -(20px/2)
-      left: 50%
-      margin-left: -(20px/2)
-      transform: rotate(45deg)
-
-    .closeButton
-      text-transform: uppercase
-      width: 100%
-      background:
-      position: absolute
-      top: 0
-      left: 0
-      padding: 7px
-      box-sizing: border-box
-
-    .share
-      display: inline-block
-      height: 25px
-      width: 25px
-      margin-left: 10px
-      position: relative
-      top: 6px
-
-      background:
-        image: url("../ico/share.png")
-        size: contain
-        repeat: no-repeat
-
-
-    .addToHomeScreen
-      font-weight: 600
-
-  .gameDiff
-    display: grid
-    grid-template-columns: repeat(3,1fr)
-    grid-gap: 10px
-    grid-row: 2
-    .easy,.medium,.hard
-      background: white
-      height: 100%
-      width: 100%
-      padding: 5px
-      box-sizing: border-box
-      text-align: center
-      text-transform: uppercase
-      font-size: 0.8em
-      display: grid
-      position: relative
-      p
-        justify-self: center
-        align-self: center
-      &.checked
-        width: 100%
-        height: 100%
-        background: lighten($containerColor, 8.5%)
-        &:after
-          width: 100%
-          height: 100%
-          content: ""
-          position: absolute
-          display: block
-          border-bottom: 5px solid #4d4d4d
-
-  .animateDown
-    animation: down 1s ease-in-out forwards
-
-    @keyframes down
-      0%
-        bottom: 5vw
-      10%
-        bottom: 15vw
-      35%,
-      100%
-        bottom: -50vw
-
-  .animateUpSettings
-    animation: upSettings 0.5s ease-in-out forwards
-
-    @keyframes upSettings
-      0%
-        top: 150vh
-
-      100%
-        top: 0vh
-
-  .animateDownSettings
-    animation: downSettings 0.5s ease-in-out forwards
-
-    @keyframes downSettings
-      0%
-        top: 0vh
-
-      100%
-        top: 150vh
-
-  .animateOut
-    position: relative
-    animation: out 0.5s ease-in-out forwards
-
-    @keyframes out
-      0%
-        left: 0vh
-        grid-row: auto
-
-      99%
-        left: -100vw
-        grid-row: auto
-
-      100%
-        grid-row: auto
-
-  .animateIn
-    position: relative
-    animation: in 0.5s ease-in-out forwards
-
-    @keyframes in
-      0%
-        left: -100vw
-        grid-row: auto
-        visibility: 0
-
-      99%
-        left: 0vh
-        grid-row: auto
-
-      100%
-        grid-row: none
-        visibility: 100
-  .diffIn
-    position: relative
-    animation: diffIn 0.5s ease-in-out forwards
-
-    @keyframes diffIn
-      0%
-        right: -110vw
-        grid-row: 2
-      100%
-        right: 0vw
-        grid-row: 2
-
-  .diffOut
-    position: relative
-    animation: diffOut 0.5s ease-in-out forwards
-
-    @keyframes diffOut
-      0%
-        right: 0vw
-      100%
-        right: -110vw
