@@ -11,7 +11,7 @@ window.addEventListener('load', e => {
   };
 });
 document.addEventListener('DOMContentLoaded',smsLink);
-document.addEventListener('touchmove',prevetDefault);
+//document.addEventListener('touchmove',prevetDefault);
 
 let scores = [];
 let throws = [];
