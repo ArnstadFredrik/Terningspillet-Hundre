@@ -118,7 +118,6 @@ function welcomeScreen(state){
 
   switch (state){
     case 1:
-      let tut = Math.round(Math.random() * (6 - 2) + 2);
       welcome.innerHTML = `<div class="tutorial" style="align-self:start;">
       <h4><i>1</i>Trill terning</h4>
       <p>Her er det om å bli først til 100 poeng.</p>
