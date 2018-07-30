@@ -144,6 +144,10 @@
   body {
     width: 420px;
   }
+  body .settings,
+  body .settingsButton {
+    position: absolute;
+  }
 }
 
 html {
@@ -376,7 +380,7 @@ body input {
 }
 
 .settings, .settingsButton {
-  position: absolute;
+  position: fixed;
   width: 100%;
   display: grid;
   grid-gap: 10px;
