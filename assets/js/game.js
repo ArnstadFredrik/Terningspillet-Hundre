@@ -623,7 +623,7 @@ function toggleGameMode() {
   if(gameDiff === undefined) gameDiff = 1;
 
   if(gameModeCheckbox.classList.contains('checked')) {
-    gameModeCheckbox.nextElementSibling.innerHTML = "enspiller";
+    gameModeCheckbox.nextElementSibling.innerHTML = "flerspiller";
     tmpPlayerTwo = document.getElementById('player1Name').value;
     localStorage.setItem('tmpPlayerTwo',tmpPlayerTwo);
 
@@ -644,7 +644,7 @@ function toggleGameMode() {
     },500);
   }
   else if(!gameModeCheckbox.classList.contains('checked')){
-    gameModeCheckbox.nextElementSibling.innerHTML = "flerspiller";
+    gameModeCheckbox.nextElementSibling.innerHTML = "enspiller";
     document.getElementById('player1Name').value = tmpPlayerTwo;
     gameMode = 0;
 
