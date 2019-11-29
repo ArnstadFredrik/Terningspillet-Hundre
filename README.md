@@ -5,4 +5,4 @@
 - set ai player name to "data daniel" **(DONE)**
 - Du tapte i enspiller **(DONE)**
 - Share button **(DONE)**
-- Move to github
+- Move to github **(DONE)**
