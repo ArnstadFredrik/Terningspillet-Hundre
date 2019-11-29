@@ -4,5 +4,5 @@
 - toggle single/multi player transitions with animateOut **(DONE)**
 - set ai player name to "data daniel" **(DONE)**
 - Du tapte i enspiller **(DONE)**
-- Share button
-- 
+- Share button **(DONE)**
+- Move to github
