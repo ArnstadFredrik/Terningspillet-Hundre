@@ -6,3 +6,4 @@
 - Du tapte i enspiller **(DONE)**
 - Share button **(DONE)**
 - Move to github **(DONE)**
+- add firebase scoreboard
