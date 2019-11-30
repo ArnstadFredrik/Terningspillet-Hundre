@@ -389,7 +389,7 @@ body input {
   background: #f2f2f2;
   padding: 20px;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 1;
 }
 
 .settingsButton {
